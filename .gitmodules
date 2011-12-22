@@ -1,12 +1,84 @@
-[submodule "bundle/nerdtree"]
-	path = bundle/nerdtree
-	url = git://github.com/scrooloose/nerdtree.git
-[submodule "bundle/pathogen"]
-	path = bundle/pathogen
-	url = git://github.com/tpope/vim-pathogen.git
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
 [submodule ".vim/bundle/pathogen"]
 	path = .vim/bundle/pathogen
 	url = git://github.com/tpope/vim-pathogen.git
+[submodule ".vim/bundle/fugitive"]
+	path = .vim/bundle/fugitive
+	url = git://github.com/tpope/vim-fugitive.git
+[submodule ".vim/bundle/surround"]
+	path = .vim/bundle/surround
+	url = git://github.com/tpope/vim-surround.git
+[submodule ".vim/bundle/repeat"]
+	path = .vim/bundle/repeat
+	url = git://github.com/tpope/vim-repeat.git
+[submodule ".vim/bundle/nerdcommenter"]
+	path = .vim/bundle/nerdcommenter
+	url = git://github.com/scrooloose/nerdcommenter.git
+[submodule ".vim/bundle/sparkup"]
+	path = .vim/bundle/sparkup
+	url = git://github.com/rstacruz/sparkup.git
+[submodule ".vim/bundle/snipmate"]
+	path = .vim/bundle/snipmate
+	url = git://github.com/garbas/vim-snipmate.git
+[submodule ".vim/bundle/tlib_vim"]
+	path = .vim/bundle/tlib_vim
+	url = git://github.com/tomtom/tlib_vim.git
+[submodule ".vim/bundle/addon-mw-utils"]
+	path = .vim/bundle/addon-mw-utils
+	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule ".vim/bundle/snipmate-snippets"]
+	path = .vim/bundle/snipmate-snippets
+	url = git://github.com/honza/snipmate-snippets.git
+[submodule ".vim/bundle/speeddating"]
+	path = .vim/bundle/speeddating
+	url = git://github.com/tpope/vim-speeddating.git
+[submodule ".vim/bundle/endwise"]
+	path = .vim/bundle/endwise
+	url = git://github.com/tpope/vim-endwise.git
+[submodule ".vim/bundle/afterimage"]
+	path = .vim/bundle/afterimage
+	url = git://github.com/tpope/vim-afterimage.git
+[submodule ".vim/bundle/ragtag"]
+	path = .vim/bundle/ragtag
+	url = git://github.com/tpope/vim-ragtag.git
+[submodule ".vim/bundle/ruby"]
+	path = .vim/bundle/ruby
+	url = git://github.com/vim-ruby/vim-ruby.git
+[submodule ".vim/bundle/supertab"]
+	path = .vim/bundle/supertab
+	url = git://github.com/ervandew/supertab.git
+[submodule ".vim/bundle/ShowMarks"]
+	path = .vim/bundle/ShowMarks
+	url = git://github.com/vim-scripts/ShowMarks.git
+[submodule ".vim/bundle/SearchComplete"]
+	path = .vim/bundle/SearchComplete
+	url = git://github.com/vim-scripts/SearchComplete.git
+[submodule ".vim/bundle/taglist"]
+	path = .vim/bundle/taglist
+	url = git://github.com/vim-scripts/taglist.vim.git
+[submodule ".vim/bundle/SQLComplete.vim"]
+	path = .vim/bundle/SQLComplete.vim
+	url = git://github.com/vim-scripts/SQLComplete.vim.git
+[submodule ".vim/bundle/vsccommand"]
+	path = .vim/bundle/vsccommand
+	url = git://github.com/vim-scripts/vcscommand.vim.git
+[submodule ".vim/bundle/matchit"]
+	path = .vim/bundle/matchit
+	url = git://github.com/mirell/vim-matchit.git
+[submodule ".vim/bundle/HTML-AutoCloseTag"]
+	path = .vim/bundle/HTML-AutoCloseTag
+	url = git://github.com/vim-scripts/HTML-AutoCloseTag.git
+[submodule ".vim/bundle/delimitMate"]
+	path = .vim/bundle/delimitMate
+	url = git://github.com/Raimondi/delimitMate.git
+[submodule ".vim/bundle/checksyntax_vim"]
+	path = .vim/bundle/checksyntax_vim
+	url = git://github.com/tomtom/checksyntax_vim.git
+[submodule ".vim/bundle/quickfixsigns_vim"]
+	path = .vim/bundle/quickfixsigns_vim
+	url = git://github.com/tomtom/quickfixsigns_vim.git
+[submodule ".vim/bundle/c.vim"]
+	path = .vim/bundle/c.vim
+	url = git://github.com/HenningM/cvim-pathogen.git
