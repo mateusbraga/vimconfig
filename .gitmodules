@@ -82,3 +82,30 @@
 [submodule ".vim/bundle/c.vim"]
 	path = .vim/bundle/c.vim
 	url = git://github.com/HenningM/cvim-pathogen.git
+[submodule ".vim/bundle/piv"]
+	path = .vim/bundle/piv
+	url = git://github.com/spf13/PIV.git
+[submodule ".vim/bundle/minibufexpl"]
+	path = .vim/bundle/minibufexpl
+	url = git://github.com/sontek/minibufexpl.vim.git
+[submodule ".vim/bundle/command-t"]
+	path = .vim/bundle/command-t
+	url = git://github.com/wincent/Command-T.git
+[submodule ".vim/bundle/ack"]
+	path = .vim/bundle/ack
+	url = git://github.com/mileszs/ack.vim.git
+[submodule ".vim/bundle/gundo"]
+	path = .vim/bundle/gundo
+	url = git://github.com/sjl/gundo.vim.git
+[submodule ".vim/bundle/pydoc"]
+	path = .vim/bundle/pydoc
+	url = git://github.com/fs111/pydoc.vim.git
+[submodule ".vim/bundle/pep8"]
+	path = .vim/bundle/pep8
+	url = git://github.com/vim-scripts/pep8.git
+[submodule ".vim/bundle/pytest"]
+	path = .vim/bundle/pytest
+	url = git://github.com/alfredodeza/pytest.vim.git
+[submodule ".vim/bundle/rope-vim"]
+	path = .vim/bundle/rope-vim
+	url = git://github.com/sontek/rope-vim.git
