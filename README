@@ -1,0 +1,11 @@
+My Vim configurations files.
+
+I used Pathogen to organize the plugins.
+
+The following languages are "supported":
+
+C, Python, PHP
+
+If you want to make a suggestion, you are welcome.
+
+Bye
