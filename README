@@ -9,3 +9,18 @@ C, Python, PHP
 If you want to make a suggestion, you are welcome.
 
 Bye
+
+---
+
+What to do:
+
+    git clone --recursive https://github.com/mateusbraga/vim_mab
+
+    cd
+    ln -s (vim_mab)/.vim .vim
+    ln -s (vim_mab)/.vimrc .vimrc
+
+    # Make command-t
+    cd vim_mab/.vim/bundle/command-t
+    rake make
+
