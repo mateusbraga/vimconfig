@@ -15,41 +15,108 @@
 "       A replacement for 99% of the uses of grep
 " Addon-mw-utils
 "       Used by others plugins: get some information from files and cache it.
+"
+" Afterimage
+"       'Edit ICO, PNG and GIF icons' converting to plain text
+"
+" C.vim (C-support)
+"       Turn Vim into a C IDE.
+" 
+" DelimitMate
+"       Automatic closing of quotes, parenthesis, brackets, etc.
+"
+" endwise
+"       Helps to end certain structures automatically (end after if) ...
+"
+" fugitive
+"       A Git wrapper
+"
+" FuzzyFinder
+"       Searches with the fuzzy/partial pattern a buffer/file/command/...
+"
+" GunDo
+"       Visual Undo in vim with diff's to check the differences
+"
+" HTML-AutoCloseTag
+"       Automatically closes HTML tag once you finish typing it with >.
+"
+" matchit
+"       Extended matching with "%"
+"
+" minibufexpl
+"       Show buffers as tabs.
+"
+" nerdcommenter
+"       Provides many different commenting operations and styles via key
+"
+" nerdtree
+"       Explore filesystem.
+"
 " Pathogen
 "     Better Management of VIM plugins
 "
-" GunDo
-"     Visual Undo in vim with diff's to check the differences
+" pep8
+"     Checks if it's pep8 conformed.
 "
-" Pytest
-"     Runs your Python tests in Vim.
-"
-" Commant-T
-"     Allows easy search and opening of files within a given path
-"
-" Snipmate
-"     Configurable snippets to avoid re-typing common comands
-"
-" PyFlakes
-"     Underlines and displays errors with Python on-the-fly
-"
-" Fugitive
-"    Interface with git from vim
-"
-" Git
-"    Syntax highlighting for git config files
+" Piv
+"     Turn vim into a PHP IDE.
 "
 " Pydoc
 "    Opens up pydoc within vim
 "
-" Surround
-"    Allows you to surround text with open/close tags
-"
 " Py.test
 "    Run py.test test's from within vim
 "
-" MakeGreen
-"    Generic test runner that works with nose
+" ragtag
+"    Mappings for XML/XHTML.
+"
+" repeat
+"    Permits using the '.' to redo a command after a plugin map.
+"
+" rope-vim
+"     vim mode that uses rope_ library to provide features like python
+"     refactorings and code-assists.
+"
+" Ruby
+"     Editing and compiling ruby within vim.
+"
+" SearchComplete
+"     Tab-complete words while typing in a search.
+"
+" ShowMarks
+"     Provides a visual representation of the location marks.
+"
+" Snipmate and snipmate-snippets
+"     Configurable snippets to avoid re-typing common comands
+"
+" speeddating
+"     Use CTRL-A/CTRL-X to increment dates, times, and more.
+"
+" SQLComplete
+"     Completion for the SQL language.
+"
+" supertab
+"     Allows you to perform all your insert completion using the tab key
+"
+" Surround
+"    Allows you to surround text with open/close tags
+"
+" Syntastic
+"    Syntax cheking plugin that runs files through external syntax checkers.
+"
+" Taglist
+"    Provides an overview of the structure of souce code files and allows you
+"    to efficiently browse through it.
+"
+" Tasklist
+"    Search the file for FIXME, TODO, and XXX
+"
+" tlib_vim
+"    Provides some utility functions
+"
+" vsccomand
+"    Useful for manipulating files controlled by CVS, SVN, SVK, git, bzr, and
+"    hg within VIM.
 "
 " ==========================================================
 " Shortcuts

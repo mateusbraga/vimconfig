@@ -82,9 +82,6 @@
 [submodule ".vim/bundle/minibufexpl"]
 	path = .vim/bundle/minibufexpl
 	url = git://github.com/sontek/minibufexpl.vim.git
-[submodule ".vim/bundle/command-t"]
-	path = .vim/bundle/command-t
-	url = git://github.com/wincent/Command-T.git
 [submodule ".vim/bundle/ack"]
 	path = .vim/bundle/ack
 	url = git://github.com/mileszs/ack.vim.git
@@ -109,3 +106,9 @@
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+[submodule ".vim/bundle/FuzzyFinder"]
+	path = .vim/bundle/FuzzyFinder
+	url = git://github.com/vim-scripts/FuzzyFinder.git
+[submodule ".vim/bundle/L9"]
+	path = .vim/bundle/L9
+	url = git://github.com/vim-scripts/L9.git
