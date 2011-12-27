@@ -1,134 +1,208 @@
+" https://github.com/mateusbraga/vim_mab/
+" ==========================================================
+" Dependencies - Libraries/Applications outside of vim
+" ==========================================================
+" Pep8 - http://pypi.python.org/pypi/pep8
+" Pyflakes
+" Ack
+" Rake & Ruby for command-t
+" nose, django-nose
 
+" ==========================================================
+" Plugins included
+" ==========================================================
+" Ack
+"       A replacement for 99% of the uses of grep
+" Addon-mw-utils
+"       Used by others plugins: get some information from files and cache it.
+" Pathogen
+"     Better Management of VIM plugins
+"
+" GunDo
+"     Visual Undo in vim with diff's to check the differences
+"
+" Pytest
+"     Runs your Python tests in Vim.
+"
+" Commant-T
+"     Allows easy search and opening of files within a given path
+"
+" Snipmate
+"     Configurable snippets to avoid re-typing common comands
+"
+" PyFlakes
+"     Underlines and displays errors with Python on-the-fly
+"
+" Fugitive
+"    Interface with git from vim
+"
+" Git
+"    Syntax highlighting for git config files
+"
+" Pydoc
+"    Opens up pydoc within vim
+"
+" Surround
+"    Allows you to surround text with open/close tags
+"
+" Py.test
+"    Run py.test test's from within vim
+"
+" MakeGreen
+"    Generic test runner that works with nose
+"
+" ==========================================================
+" Shortcuts
+" ==========================================================
 " Environment {
-	" Basics {
-		set nocompatible 	" must be first line
-		"set background=dark     " Assume a dark background
-	" }
+    set nocompatible    " must be first line
+    " Windows Compatible {
+        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+        " across (heterogeneous) systems easier. 
+        if has('win32') || has('win64')
+            set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+        endif
+    " }
 
-	" Windows Compatible {
-		" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-		" across (heterogeneous) systems easier. 
-		if has('win32') || has('win64')
-		  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-		endif
-	" }
-    " 
-	" Setup Bundle Support {
-	" The next two lines ensure that the ~/.vim/bundle/ system works
-		call pathogen#infect()
-		call pathogen#helptags()
-	" }
+    " Setup Bundle Support {
+    " The next two lines ensure that the ~/.vim/bundle/ system works
+        call pathogen#infect()
+        call pathogen#helptags()
+    " }
 
 " }
 
 " General {
-    filetype on  	" Automatically detect file types.
-    filetype plugin on  	" Automatically detect file types.
-    filetype plugin indent on  	" Automatically detect file types.
-    syntax on 					" syntax highlighting
-    set mouse=a					" automatically enable mouse usage
-    "set autochdir 				" always switch to the current file directory.. Messes with some plugins, best left commented out
-    " not every vim is compiled with this, use the following line instead
-    " If you use command-t plugin, it conflicts with this, comment it out.
-    "autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-    scriptencoding utf-8
+    filetype on                 " Automatically detect file types.
+    filetype plugin on          " Automatically load plugins of file types.
+    filetype plugin indent on   " Automatically indent file types.
+    syntax on                   " syntax highlighting
+    set mouse=a                 " automatically enable mouse usage
+    scriptencoding utf-8        " Set enconding to utf-8.
 
-    " set autowrite                  " automatically write a file when leaving a modified buffer
-    set shortmess+=filmnrxoOtT     	" abbrev. of messages (avoids 'hit enter')
-    set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
-    set virtualedit=onemore 	   	" allow for cursor beyond last character
-    set history=1000  				" Store a ton of history (default is 20)
-    
-	" Setting up the directories {
-		set backup 						" backups are nice ...
-		set undofile					" so is persistent undo ...
-		set undolevels=1000 "maximum number of changes that can be undone
-		set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-        " Moved to function at bottom of the file
-		"set backupdir=$HOME/.vimbackup//  " but not when they clog .
-		"set directory=$HOME/.vimswap// 	" Same for swap files
-		"set viewdir=$HOME/.vimviews// 	" same for view files
-		
-		"" Creating directories if they don't exist
-		"silent execute '!mkdir -p $HVOME/.vimbackup'
-		"silent execute '!mkdir -p $HOME/.vimswap'
-		"silent execute '!mkdir -p $HOME/.vimviews'
-		au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
-		au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
-	" }
+    " Some configs for backup or undo {
+        set history=1000                " Store a ton of history (default is 20)
+        set backup                      " backups are nice ...
+        set undofile                    " so is persistent undo ...
+        set undolevels=1000 "maximum number of changes that can be undone
+        set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+
+        set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
+        au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
+        au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
+    " }
+
+    " Ignore these files when completing
+    set wildignore+=*.o,*.obj,.git,*.pyc
+    set wildignore+=eggs/**
+    set wildignore+=*.egg-info/**
 " }
 
 " VIM UI {
     colorscheme desert
-    set tabpagemax=15
-    set showmode
-
-    set cursorline
-
-    if has('cmdline_info')
-    set ruler
-    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
-
-    set showcmd                " show partial commands in status line and
-            " selected characters/lines in visual mode
-    endif
-    
-    if has('statusline')
-    set laststatus=2
-
-        " Broken down into easily includeable segments
-        set statusline=%<%f\    " Filename
-        set statusline+=%w%h%m%r " Options
-        set statusline+=%{fugitive#statusline()} "  Git Hotness
-        set statusline+=\ [%{&ff}/%Y]            " filetype
-        set statusline+=\ [%{getcwd()}]          " current dir
-        "set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
-        set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-    endif
-
-    set backspace=indent,eol,start	" backspace for dummys
-    set linespace=0					" No extra spaces between rows
     set number
-    " Toggle line numbers and fold column for easy copying:
-    nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
+    set tabpagemax=15           " Max number of tab pages to be opened
+    set title                   " show title in console title bar
+    set cursorline              " have a line indicate the cursor location
+    set nostartofline           " Avoid moving cursor to BOL when jumping around
+    set virtualedit=block       " Let cursor move past the last char in <C-v> mode
+    set scrolloff=3             " Keep 3 context lines above and below the cursor
+    set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
+    set showmatch               " Briefly jump to a paren once it's balanced
+    set nowrap                  " don't wrap text
+    set linebreak               " don't wrap textin the middle of a word
+    set autoindent              " always set autoindenting on
+    set smartindent             " use smart indent if there is no indent file
+    set tabstop=4               " <tab> inserts 4 spaces 
+    set shiftwidth=4            " but an indent level is 2 spaces wide.
+    set softtabstop=4           " <BS> over an autoindent deletes both spaces.
+    set expandtab               " Use spaces, not tabs, for autoindent/tab key.
+    set shiftround              " rounds indent to a multiple of shiftwidth
+    set matchpairs+=<:>         " show matching <> (html mainly) as well
+    set foldmethod=indent       " allow us to fold on indents
+    set foldlevel=99            " don't fold by default
+    set winminheight=0          " windows can be 0 line high 
+    set wildmenu                " show list instead of just completing
+    set wildmode=list:longest,full " command <Tab> completion, list matches, then longest common part, then all.
+    set whichwrap=b,s,h,l,<,>,[,]  " backspace and cursor keys wrap to
+    set scrolljump=5            " lines to scroll when cursor leaves screen
+    set foldenable              " auto fold code
+    set gdefault                " the /g flag on :s substitutions by default
 
-    set showmatch					" show matching brackets/parenthesis
-    set incsearch					" find as you type search
-    set hlsearch					" highlight search terms
-    set winminheight=0				" windows can be 0 line high 
-    set ignorecase					" case insensitive search
-    set smartcase					" case sensitive when uc present
-    set wildmenu					" show list instead of just completing
-    set wildmode=list:longest,full	" command <Tab> completion, list matches, then longest common part, then all.
-    set whichwrap=b,s,h,l,<,>,[,]	" backspace and cursor keys wrap to
-    set scrolljump=5 				" lines to scroll when cursor leaves screen
-    set scrolloff=3 				" minimum lines to keep above and below cursor
-    set foldenable  				" auto fold code
-    set gdefault					" the /g flag on :s substitutions by default
-" }
+    " displays tabs with :set list & displays when a line runs off-screen
+    set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
+    set list
+    
+    """" Reading/Writing
+    set noautowrite             " Never write a file unless I request it.
+    set noautowriteall          " NEVER.
+    set noautoread              " Don't automatically re-read changed files.
+    set modeline                " Allow vim options to be embedded in files;
+    set modelines=5             " they must be within the first or last 5 lines.
+    set ffs=unix,dos,mac        " Try recognizing dos, unix, and mac line endings.
 
-" Formatting {
-    set nowrap                     	" wrap long lines
-    set autoindent                 	" indent at the same level of the previous line
-    set shiftwidth=4               	" use indents of 4 spaces
-    set expandtab 	  	     		" tabs are spaces, not tabs
-    set tabstop=4 					" an indentation every four columns
-    set softtabstop=4 				" let backspace Delete indent
-    "set matchpairs+=<:>            	" match, to be used with % 
-    "set comments=sl:/*,mb:*,elx:*/  " auto format comment blocks
-    " Remove trailing whitespaces and ^M chars
-    autocmd FileType c,cpp,java,php,js,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+    """" Messages, Info, Status
+    set ls=2                    " allways show status line
+    set vb t_vb=                " Disable all bells.  I hate ringing/flashing.
+    set confirm                 " Y-N-C prompt if closing with unsaved changes.
+    set showcmd                 " Show incomplete normal mode commands as I type.
+    set report=0                " : commands always print changed line count.
+    set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
+    set ruler                   " Show some info, even without statuslines.
+    set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
+    set laststatus=2            " Always show statusline, even if only 1 window.
+    set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
+
+    """ Searching and Patterns
+    set ignorecase              " Default to using case insensitive searches,
+    set smartcase               " unless uppercase letters are used in the regex.
+    set smarttab                " Handle tabs more intelligently 
+    set hlsearch                " Highlight searches by default.
+    set incsearch               " Incrementally search while typing a /regex
+    
+    """" Display
+    if has("gui_running")
+        colorscheme desert
+        " Remove menu bar
+        set guioptions-=m
+
+        " Remove toolbar
+        set guioptions-=T
+    else
+        colorscheme torte
+    endif
 " }
 
 " Key (re)Mappings {
 
-    "The default leader is '\', but many people prefer ',' as it's in a standard
-    "location
-    let mapleader = ','
+    let mapleader = ','     " use ',' as the leader instead of '\'
+
+    " Set working directory
+    nnoremap <leader>. :lcd %:p:h<CR>
+
+    " Paste from clipboard
+    map <leader>p "+p
+    
+    " Quit window on <leader>q
+    nnoremap <leader>q :q<CR>
+
+    " hide matches on <leader>space
+    nnoremap <leader><space> :nohlsearch<cr>
+
+    " Remove trailing whitespace on <leader>S
+    nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
+
+    " don't outdent hashes
+    inoremap # #
+
+    " Seriously, guys. It's not like :W is bound to anything anyway.
+    command! W :w
 
     " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
     nnoremap ; :
 
+    " Toggle line numbers and fold column for easy copying:
+    nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 
     " Easier moving in tabs and windows
     map <C-J> <C-W>j
@@ -140,22 +214,19 @@
     nnoremap j gj
     nnoremap k gk
 
-    " The following two lines conflict with moving to top and bottom of the
-    " screen
-    " If you prefer that functionality, comment them out.
-    map <S-H> gT          
-    map <S-L> gt
+    " Split vertically {
+    nmap <leader>sb :call SplitScroll()<CR>
+    " Split Scroll - NOT A PLUGIN"
+        fu! SplitScroll()
+            :wincmd v
+            :wincmd w
+            execute "normal! \<C-d>"
+            :set scrollbind
+            :wincmd w
+            :set scrollbind
+        endfu
+    "}
 
-    " Stupid shift key fixes
-    cmap W w 						
-    cmap WQ wq
-    cmap wQ wq
-    cmap Q q
-    cmap Tabe tabe
-
-    " Yank from the cursor to the end of the line, to be consistent with C and D.
-    "nnoremap Y y$
-        
     """ Code folding options
     nmap <leader>f0 :set foldlevel=0<CR>
     nmap <leader>f1 :set foldlevel=1<CR>
@@ -168,25 +239,10 @@
     nmap <leader>f8 :set foldlevel=8<CR>
     nmap <leader>f9 :set foldlevel=9<CR>
 
-    "clearing highlighted search
-    nmap <silent> <leader>/ :nohlsearch<CR>
-
-    " Shortcuts
-    " Change Working Directory to that of the current file
-    cmap cwd lcd %:p:h
-    cmap cd. lcd %:p:h
-
     " visual shifting (does not exit Visual mode)
     vnoremap < <gv
     vnoremap > >gv 
 
-    " Fix home and end keybindings for screen, particularly on mac
-    " - for some reason this fixes the arrow keys too. huh.
-    map [F $
-    imap [F $
-    map [H g0
-    imap [H g0
-        
     " For when you forget to sudo.. Really Write the file.
     cmap w!! w !sudo tee % >/dev/null
 " }
@@ -196,6 +252,10 @@
     " Supertab {
         let g:SuperTabDefaultCompletionType = "context"
         "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+    " }
+    
+    " Ack {
+    set grepprg=ack         " replace the default grep program with ack
     " }
 
     " Misc { 
@@ -238,17 +298,24 @@
     " and make sure that it doesn't break supertab
     let g:SuperTabCrMapping = 0
     
-        " automatically open and close the popup menu / preview window
+    """ Insert completion
+        " don't select first item, follow typing in autocomplete
+        set completeopt=menuone,longest,preview
+        set pumheight=6             " Keep a small completion window
         au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
         set completeopt=menu,preview,longest
+        " close preview window automatically when we move around
+        autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+        autocmd InsertLeave * if pumvisible() == 0|pclose|endif
     " }
     
     " Ctags {
     " This will look in the current directory for 'tags', and work up the tree towards root until one is found. 
         set tags=./tags;/,$HOME/vimtags
-    map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR> " C-\ - Open the definition in a new tab
-    map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>      " A-] - Open the definition in a vertical split
+        map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR> " C-\ - Open the definition in a new tab
+        map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>      " A-] - Open the definition in a vertical split
     " }
+    
     " Delimitmate {
         au FileType * let b:delimitMate_autoclose = 1
 
@@ -256,6 +323,10 @@
     au FileType xml,html,xhtml let b:delimitMate_matchpairs = "(:),[:],{:}"
     " }
     
+    " Task list - Toggle the tasklist {
+        map <leader>td <Plug>TaskList
+    "}
+
     " NerdTree {
         map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
         map <leader>e :NERDTreeFind<CR>
@@ -301,7 +372,8 @@
     "}
 
     " Pyflakes {
-    "let g:pyflakes_use_quickfix = 0
+        " Don't let pyflakes use the quickfix window
+        let g:pyflakes_use_quickfix = 0
     "}
     
     " Pep8 {
@@ -320,10 +392,27 @@
     " Ack {
     nmap <leader>a <Esc>:Ack!
     " }
-
-
-
-" Python {
-    autocmd FileType python set foldmethod=indent foldlevel=99
+    
+" Python
     au FileType python set omnifunc=pythoncomplete#Complete
-"}
+    au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
+    au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+
+" Add the virtualenv's site-packages to vim path
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUALENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+" Load up virtualenv's vimrc if it exists
+if filereadable($VIRTUAL_ENV . '/.vimrc')
+    source $VIRTUAL_ENV/.vimrc
+endif
+
+set colorcolumn=79
