@@ -106,6 +106,6 @@
 [submodule ".vim/bundle/tasklist"]
 	path = .vim/bundle/tasklist
 	url = https://github.com/vim-scripts/TaskList.vim.git
-[submodule "syntastic"]
-	path = syntastic
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
