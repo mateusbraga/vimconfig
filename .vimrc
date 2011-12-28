@@ -21,7 +21,7 @@
 "
 " C.vim (C-support)
 "       Turn Vim into a C IDE.
-" 
+"
 " DelimitMate
 "       Automatic closing of quotes, parenthesis, brackets, etc.
 "
@@ -125,7 +125,7 @@
     set nocompatible    " must be first line
     " Windows Compatible {
         " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-        " across (heterogeneous) systems easier. 
+        " across (heterogeneous) systems easier.
         if has('win32') || has('win64')
             set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
         endif
@@ -180,7 +180,7 @@
     set linebreak               " don't wrap textin the middle of a word
     set autoindent              " always set autoindenting on
     set smartindent             " use smart indent if there is no indent file
-    set tabstop=4               " <tab> inserts 4 spaces 
+    set tabstop=4               " <tab> inserts 4 spaces
     set shiftwidth=4            " but an indent level is 2 spaces wide.
     set softtabstop=4           " <BS> over an autoindent deletes both spaces.
     set expandtab               " Use spaces, not tabs, for autoindent/tab key.
@@ -188,7 +188,7 @@
     set matchpairs+=<:>         " show matching <> (html mainly) as well
     set foldmethod=indent       " allow us to fold on indents
     set foldlevel=99            " don't fold by default
-    set winminheight=0          " windows can be 0 line high 
+    set winminheight=0          " windows can be 0 line high
     set wildmenu                " show list instead of just completing
     set wildmode=list:longest,full " command <Tab> completion, list matches, then longest common part, then all.
     set whichwrap=b,s,h,l,<,>,[,]  " backspace and cursor keys wrap to
@@ -199,7 +199,7 @@
     " displays tabs with :set list & displays when a line runs off-screen
     set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
     set list
-    
+
     """" Reading/Writing
     set noautowrite             " Never write a file unless I request it.
     set noautowriteall          " NEVER.
@@ -223,10 +223,10 @@
     """ Searching and Patterns
     set ignorecase              " Default to using case insensitive searches,
     set smartcase               " unless uppercase letters are used in the regex.
-    set smarttab                " Handle tabs more intelligently 
+    set smarttab                " Handle tabs more intelligently
     set hlsearch                " Highlight searches by default.
     set incsearch               " Incrementally search while typing a /regex
-    
+
     """" Display
     if has("gui_running")
         colorscheme desert
@@ -249,7 +249,7 @@
 
     " Paste from clipboard
     map <leader>p "+p
-    
+
     " Quit window on <leader>q
     nnoremap <leader>q :q<CR>
 
@@ -276,7 +276,7 @@
     map <C-K> <C-W>k
     map <C-L> <C-W>l
     map <C-H> <C-W>h
-    
+
     " Wrapped lines goes down/up to next row, rather than next line in file.
     nnoremap j gj
     nnoremap k gk
@@ -308,7 +308,7 @@
 
     " visual shifting (does not exit Visual mode)
     vnoremap < <gv
-    vnoremap > >gv 
+    vnoremap > >gv
 
     " For when you forget to sudo.. Really Write the file.
     cmap w!! w !sudo tee % >/dev/null
@@ -320,12 +320,12 @@
         let g:SuperTabDefaultCompletionType = "context"
         "let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
     " }
-    
+
     " Ack {
-    set grepprg=ack         " replace the default grep program with ack
+        set grepprg=ack         " replace the default grep program with ack
     " }
 
-    " Misc { 
+    " Misc {
         :map <C-F10> <Esc>:vsp<CR>:VTree<CR>
         " map Control + F10 to Vtree
 
@@ -339,7 +339,7 @@
 
         let b:match_ignorecase = 1
     " }
-    
+
     " ShowMarks {
         let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         " Don't leave on by default, use :ShowMarksOn to enable
@@ -353,7 +353,7 @@
         " For multiple marks on the same line.
         highlight ShowMarksHLm gui=bold guibg=LightGreen guifg=DarkGreen
     " }
-    
+
     " OmniComplete {
         "if has("autocmd") && exists("+omnifunc")
             "autocmd Filetype *
@@ -364,7 +364,7 @@
 
     " and make sure that it doesn't break supertab
     let g:SuperTabCrMapping = 0
-    
+
     """ Insert completion
         " don't select first item, follow typing in autocomplete
         set completeopt=menuone,longest,preview
@@ -375,24 +375,31 @@
         autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
         autocmd InsertLeave * if pumvisible() == 0|pclose|endif
     " }
-    
+
     " Ctags {
-    " This will look in the current directory for 'tags', and work up the tree towards root until one is found. 
+    " This will look in the current directory for 'tags', and work up the tree towards root until one is found.
         set tags=./tags;/,$HOME/vimtags
         map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR> " C-\ - Open the definition in a new tab
         map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>      " A-] - Open the definition in a vertical split
     " }
-    
+
     " Delimitmate {
         au FileType * let b:delimitMate_autoclose = 1
 
         " If using html auto complete (complete closing tag)
     au FileType xml,html,xhtml let b:delimitMate_matchpairs = "(:),[:],{:}"
     " }
-    
+
     " Task list - Toggle the tasklist {
         map <leader>td <Plug>TaskList
     "}
+
+    " Syntastic {
+        set statusline+=%#warningmsg#
+        set statusline+=%{SyntasticStatuslineFlag()}
+        set statusline+=%*
+        
+        " }
 
     " NerdTree {
         map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
@@ -406,60 +413,55 @@
         let NERDTreeShowHidden=1
         let NERDTreeKeepTreeInNewTab=1
     " }
-    
+
     " Buffer explorer {
-    nmap <leader>b :BufExplorer<CR>
+        nmap <leader>b :BufExplorer<CR>
     " }
-        
+
     " VCS commands {
-    nmap <leader>vs :VCSStatus<CR>
-    nmap <leader>vc :VCSCommit<CR>
-    nmap <leader>vb :VCSBlame<CR>
-    nmap <leader>va :VCSAdd<CR>
-    nmap <leader>vd :VCSVimDiff<CR>
-    nmap <leader>vl :VCSLog<CR>
-    nmap <leader>vu :VCSUpdate<CR>
+        nmap <leader>vs :vcsstatus<cr>
+        nmap <leader>vc :vcscommit<cr>
+        nmap <leader>vb :vcsblame<cr>
+        nmap <leader>va :vcsadd<cr>
+        nmap <leader>vd :vcsvimdiff<cr>
+        nmap <leader>vl :vcslog<cr>
+        nmap <leader>vu :vcsupdate<cr>
     " }
 
     " Debugging with VimDebugger {
-    map <F11> :DbgStepInto<CR>
-    map <F10> :DbgStepOver<CR>
-    map <S-F11> :DbgStepOut<CR>
-    map <F5> :DbgRun<CR>
-    map <F6> :DbgDetach<CR>
-    map <F8> :DbgToggleBreakpoint<CR>
-    map <S-F8> :DbgFlushBreakpoints<CR>
-    map <F9> :DbgRefreshWatch<CR>
-    map <S-F9> :DbgAddWatch<CR>
+        map <F11> :DbgStepInto<CR>
+        map <F10> :DbgStepOver<CR>
+        map <S-F11> :DbgStepOut<CR>
+        map <F5> :DbgRun<CR>
+        map <F6> :DbgDetach<CR>
+        map <F8> :DbgToggleBreakpoint<CR>
+        map <S-F8> :DbgFlushBreakpoints<CR>
+        map <F9> :DbgRefreshWatch<CR>
+        map <S-F9> :DbgAddWatch<CR>
 
     " }
-    
+
     " Gundo {
-    map <leader>g :GundoToggle<CR>
+        map <leader>g :GundoToggle<CR>
     "}
 
-    " Pyflakes {
-        " Don't let pyflakes use the quickfix window
-        let g:pyflakes_use_quickfix = 0
-    "}
-    
     " Pep8 {
-    let g:pep8_map='<leader>8'
-    " } 
-    
+        let g:pep8_map='<leader>8'
+    " }
+
     " Pydoc {
-    set completeopt=menuone,longest,preview
+        set completeopt=menuone,longest,preview
     " }
-    
+
     " Rope {
-    map <leader>j :RopeGotoDefinition<CR>
-    map <leader>r :RopeRename<CR>
+        map <leader>j :RopeGotoDefinition<CR>
+        map <leader>r :RopeRename<CR>
     "}
-    
+
     " Ack {
-    nmap <leader>a <Esc>:Ack!
+        nmap <leader>a <Esc>:Ack!
     " }
-    
+
 " Python
     au FileType python set omnifunc=pythoncomplete#Complete
     au FileType python setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4 smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class,with
