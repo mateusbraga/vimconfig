@@ -250,8 +250,8 @@
     " Paste from clipboard
     map <leader>p "+p
 
-    " Quit window on <leader>q
-    nnoremap <leader>q :q<CR>
+    " Close buffer on <leader>q
+    nnoremap <leader>q :bd<CR>
 
     " hide matches on <leader>space
     nnoremap <leader><space> :nohlsearch<cr>
@@ -276,6 +276,8 @@
     map <C-K> <C-W>k
     map <C-L> <C-W>l
     map <C-H> <C-W>h
+    map <F3> :tabp<CR>
+    map <F4> :tabn<CR>
 
     " Wrapped lines goes down/up to next row, rather than next line in file.
     nnoremap j gj
@@ -385,9 +387,10 @@
 
     " Delimitmate {
         au FileType * let b:delimitMate_autoclose = 1
+        "au FileType cpp let b:delimitMate_matchpairs = "(:),[:],{:}"
 
         " If using html auto complete (complete closing tag)
-    au FileType xml,html,xhtml let b:delimitMate_matchpairs = "(:),[:],{:}"
+        au FileType xml,html,xhtml let b:delimitMate_matchpairs = "(:),[:],{:}"
     " }
 
     " Task list - Toggle the tasklist {
@@ -398,7 +401,7 @@
         set statusline+=%#warningmsg#
         set statusline+=%{SyntasticStatuslineFlag()}
         set statusline+=%*
-        
+
         " }
 
     " NerdTree {
