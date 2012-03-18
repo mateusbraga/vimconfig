@@ -147,23 +147,6 @@
     set mouse=a                 " automatically enable mouse usage
     scriptencoding utf-8        " Set enconding to utf-8.
 
-    " Some configs for backup or undo {
-        set history=1000                " Store a ton of history (default is 20)
-        set backup                      " backups are nice ...
-        set undofile                    " so is persistent undo ...
-        set undolevels=1000 "maximum number of changes that can be undone
-        set undoreload=10000 "maximum number lines to save for undo on a buffer reload
-
-        set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
-        au BufWinLeave * silent! mkview  "make vim save view (state) (folds, cursor, etc)
-        au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
-    " }
-
-    " Ignore these files when completing
-    set wildignore+=*.o,*.obj,.git,*.pyc
-    set wildignore+=eggs/**
-    set wildignore+=*.egg-info/**
-" }
 
 " VIM UI {
     colorscheme desert
@@ -246,6 +229,8 @@
 
     " Set working directory
     nnoremap <leader>. :lcd %:p:h<CR>
+
+    map Q gq
 
     " Paste from clipboard
     map <leader>p "+p
