@@ -261,8 +261,8 @@
     map <C-K> <C-W>k
     map <C-L> <C-W>l
     map <C-H> <C-W>h
-    map <F3> :tabp<CR>
-    map <F4> :tabn<CR>
+    map <F3> :bnext<CR>
+    map <F4> :bprevious<CR>
 
     " Wrapped lines goes down/up to next row, rather than next line in file.
     nnoremap j gj
