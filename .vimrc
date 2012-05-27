@@ -146,6 +146,8 @@
     syntax on                   " syntax highlighting
     set mouse=a                 " automatically enable mouse usage
     scriptencoding utf-8        " Set enconding to utf-8.
+    set backup
+    set history=1000
 
 
 " VIM UI {
@@ -254,7 +256,7 @@
     nnoremap ; :
 
     " Toggle line numbers and fold column for easy copying:
-    nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
+    "nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 
     " Easier moving in tabs and windows
     map <C-J> <C-W>j
@@ -263,6 +265,10 @@
     map <C-H> <C-W>h
     map <F3> :bprevious<CR>
     map <F4> :bnext<CR>
+
+    " Insert timestamp
+    nmap <F2> a<C-R>=strftime("%F %T%z")<CR><Esc>
+    imap <F2> <C-R>=strftime("%F %T%z")<CR>
 
     " Wrapped lines goes down/up to next row, rather than next line in file.
     nnoremap j gj
@@ -372,7 +378,7 @@
 
     " Delimitmate {
         au FileType * let b:delimitMate_autoclose = 1
-        "au FileType cpp let b:delimitMate_matchpairs = "(:),[:],{:}"
+        au FileType cpp let b:delimitMate_matchpairs = "(:),[:],{:}"
 
         " If using html auto complete (complete closing tag)
         au FileType xml,html,xhtml let b:delimitMate_matchpairs = "(:),[:],{:}"
@@ -456,6 +462,7 @@
     au BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 
 " Add the virtualenv's site-packages to vim path
+if has('python')
 py << EOF
 import os.path
 import sys
@@ -466,6 +473,7 @@ if 'VIRTUALENV' in os.environ:
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 EOF
+endif
 
 " Load up virtualenv's vimrc if it exists
 if filereadable($VIRTUAL_ENV . '/.vimrc')
