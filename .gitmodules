@@ -64,9 +64,6 @@
 [submodule ".vim/bundle/vsccommand"]
 	path = .vim/bundle/vsccommand
 	url = git://github.com/vim-scripts/vcscommand.vim.git
-[submodule ".vim/bundle/matchit"]
-	path = .vim/bundle/matchit
-	url = git://github.com/mirell/vim-matchit.git
 [submodule ".vim/bundle/HTML-AutoCloseTag"]
 	path = .vim/bundle/HTML-AutoCloseTag
 	url = git://github.com/vim-scripts/HTML-AutoCloseTag.git
