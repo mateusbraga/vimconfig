@@ -123,6 +123,7 @@
 " ==========================================================
 " Environment {
 set nocompatible    " must be first line
+
 " Windows Compatible {
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 " across (heterogeneous) systems easier.
@@ -135,8 +136,6 @@ endif
 " The next two lines ensure that the ~/.vim/bundle/ system works
 call pathogen#infect()
 call pathogen#helptags()
-" }
-
 " }
 
 " General {
@@ -185,8 +184,8 @@ set wildmode=list:longest,full " command <Tab> completion, list matches, then lo
 set whichwrap=b,s,h,l,<,>,[,]  " backspace and cursor keys wrap to
 set scrolljump=5            " lines to scroll when cursor leaves screen
 
-set cursorline              " have a line indicate the cursor location
-hi CursorLine term=bold cterm=bold guibg=Grey40 "Make line bold instead of underlining
+"set cursorline              " have a line indicate the cursor location
+"hi CursorLine term=bold cterm=bold guibg=Grey40 "Make line bold instead of underlining
 
 if version >= 720
     set colorcolumn=79
@@ -226,7 +225,9 @@ set gdefault                " the /g flag on :s substitutions by default
 
 " }
 " (re)Mappings {
-inoremap # # " don't outdent hashes
+
+" don't outdent hashes
+inoremap # #
 "
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
@@ -426,18 +427,13 @@ map <S-F9> :DbgAddWatch<CR>
 map <leader>g :GundoToggle<CR>
 "}
 
-" Pep8 {
-let g:pep8_map='<leader>8'
-" }
+" Python-mode {
+"Disable pylint checking every save
+"let g:pymode_lint_write = 0
 
-" Pydoc {
-set completeopt=menuone,longest,preview
+" Set key 'R' for run python code
+"let g:pymode_run_key = 'R''
 " }
-
-" Rope {
-map <leader>j :RopeGotoDefinition<CR>
-map <leader>r :RopeRename<CR>
-"}
 
 " Ack {
 nmap <leader>a <Esc>:Ack!
@@ -451,25 +447,4 @@ au BufNewFile,BufRead *.py set efm=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,
 
 " Text
 au BufNewFile,BufRead *.txt set wrap | set tw=79 | set wm=2
-
-
-" Python Code {
-if has('python')
-    " Add the virtualenv's site-packages to vim path
-    " py << EOF
-    " import os.path
-    " import sys
-    " import vim
-    " if 'VIRTUALENV' in os.environ:
-    " project_base_dir = os.environ['VIRTUAL_ENV']
-    " sys.path.insert(0, project_base_dir)
-    " activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    " execfile(activate_this, dict(__file__=activate_this))
-    " EOF
-    " Load up virtualenv's vimrc if it exists
-    " if filereadable($VIRTUAL_ENV . '/.vimrc')
-    " source $VIRTUAL_ENV/.vimrc
-    " endif
-endif
-" }
 
