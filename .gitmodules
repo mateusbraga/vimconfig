@@ -40,9 +40,11 @@
 [submodule ".vim/bundle/afterimage"]
 	path = .vim/bundle/afterimage
 	url = git://github.com/tpope/vim-afterimage.git
+    ignore = dirty
 [submodule ".vim/bundle/ragtag"]
 	path = .vim/bundle/ragtag
 	url = git://github.com/tpope/vim-ragtag.git
+    ignore = dirty
 [submodule ".vim/bundle/ruby"]
 	path = .vim/bundle/ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
@@ -52,15 +54,18 @@
 [submodule ".vim/bundle/ShowMarks"]
 	path = .vim/bundle/ShowMarks
 	url = git://github.com/vim-scripts/ShowMarks.git
+    ignore = dirty
 [submodule ".vim/bundle/taglist"]
 	path = .vim/bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
+    ignore = dirty
 [submodule ".vim/bundle/SQLComplete.vim"]
 	path = .vim/bundle/SQLComplete.vim
 	url = git://github.com/vim-scripts/SQLComplete.vim.git
 [submodule ".vim/bundle/vsccommand"]
 	path = .vim/bundle/vsccommand
 	url = git://github.com/vim-scripts/vcscommand.vim.git
+    ignore = dirty
 [submodule ".vim/bundle/HTML-AutoCloseTag"]
 	path = .vim/bundle/HTML-AutoCloseTag
 	url = git://github.com/vim-scripts/HTML-AutoCloseTag.git
@@ -70,6 +75,7 @@
 [submodule ".vim/bundle/c.vim"]
 	path = .vim/bundle/c.vim
 	url = git://github.com/HenningM/cvim-pathogen.git
+    ignore = dirty
 [submodule ".vim/bundle/piv"]
 	path = .vim/bundle/piv
 	url = git://github.com/spf13/PIV.git
