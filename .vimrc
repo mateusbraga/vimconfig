@@ -55,27 +55,14 @@
 " Pathogen
 "     Better Management of VIM plugins
 "
-" pep8
-"     Checks if it's pep8 conformed.
-"
-" Piv
-"     Turn vim into a PHP IDE.
-"
-" Pydoc
-"    Opens up pydoc within vim
-"
-" Py.test
-"    Run py.test test's from within vim
+" python-mode
+"     Great python stuff
 "
 " ragtag
 "    Mappings for XML/XHTML.
 "
 " repeat
 "    Permits using the '.' to redo a command after a plugin map.
-"
-" rope-vim
-"     vim mode that uses rope_ library to provide features like python
-"     refactorings and code-assists.
 "
 " Ruby
 "     Editing and compiling ruby within vim.
@@ -237,23 +224,42 @@ vnoremap > >gv
 cmap w!! w !sudo tee % >/dev/null
 
 " Key (re)Mappings {
-let mapleader = ','                " use ',' as the leader instead of '\'
+" use ',' as the leader instead of '\'
+let mapleader = ','     
 
-nnoremap <leader>. :lcd %:p:h<CR>                 " Set working directory
+" Set working directory
+nnoremap <leader>. :lcd %:p:h<CR>                 
 
 map Q gq
 
-nmap <leader>p "+p                                " Paste from clipboard
+" Paste from clipboard
+nmap <leader>p "+p                                
+"
+     " Close buffer on <leader>q
+nnoremap <leader>q :bd<CR>              
 
-nnoremap <leader>q :bd<CR>                   " Close buffer on <leader>q
+" hide matches on <leader>space
+nnoremap <leader><space> :nohlsearch<cr> 
 
-nnoremap <leader><space> :nohlsearch<cr>  " hide matches on <leader>space
+" Remove trailing whitespace on <leader>S TODO_FORMAT 
+nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR> 
 
-nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR> " Remove trailing whitespace on <leader>S TODO_FORMAT 
+" Seriously, guys. It's not like :W is bound to anything anyway.
+command! W :w 
 
-command! W :w " Seriously, guys. It's not like :W is bound to anything anyway.
+" Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
+nnoremap ; : 
 
-nnoremap ; : " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
+if has("gui_running")
+    " C-Space seems to work under gVim on both Linux and win32
+    inoremap <C-Space> <C-n>
+else " no gui
+  if has("unix")
+    inoremap <Nul> <C-n>
+  else
+  " I have no idea of the name of Ctrl-Space elsewhere
+  endif
+endif
 
 " Easier moving
 map <C-J> <C-W>j

@@ -52,9 +52,6 @@
 [submodule ".vim/bundle/ShowMarks"]
 	path = .vim/bundle/ShowMarks
 	url = git://github.com/vim-scripts/ShowMarks.git
-[submodule ".vim/bundle/SearchComplete"]
-	path = .vim/bundle/SearchComplete
-	url = git://github.com/vim-scripts/SearchComplete.git
 [submodule ".vim/bundle/taglist"]
 	path = .vim/bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
