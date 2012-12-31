@@ -267,6 +267,8 @@ map <C-K> <C-W>k
 map <C-L> <C-W>l
 map <C-H> <C-W>h
 
+imap <F3> -----------------------------------------------------------------------------
+
 " F2 {
 " Normal: Toggle line numbers and fold column for easy copying:
 nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
@@ -435,7 +437,7 @@ map <leader>g :GundoToggle<CR>
 
 " Python-mode {
 "Disable pylint checking every save
-"let g:pymode_lint_write = 0
+let g:pymode_lint_write = 0
 
 " Set key 'R' for run python code
 "let g:pymode_run_key = 'R''
