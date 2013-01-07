@@ -1,45 +1,50 @@
-[submodule ".vim/bundle/nerdtree"]
-	path = .vim/bundle/nerdtree
-	url = git://github.com/scrooloose/nerdtree.git
 [submodule ".vim/bundle/pathogen"]
 	path = .vim/bundle/pathogen
 	url = git://github.com/tpope/vim-pathogen.git
+    ignore = dirty
 [submodule ".vim/bundle/fugitive"]
 	path = .vim/bundle/fugitive
 	url = git://github.com/tpope/vim-fugitive.git
+    ignore = dirty
 [submodule ".vim/bundle/surround"]
 	path = .vim/bundle/surround
 	url = git://github.com/tpope/vim-surround.git
+    ignore = dirty
 [submodule ".vim/bundle/repeat"]
 	path = .vim/bundle/repeat
 	url = git://github.com/tpope/vim-repeat.git
+    ignore = dirty
 [submodule ".vim/bundle/nerdcommenter"]
 	path = .vim/bundle/nerdcommenter
 	url = git://github.com/scrooloose/nerdcommenter.git
+    ignore = dirty
 [submodule ".vim/bundle/sparkup"]
 	path = .vim/bundle/sparkup
 	url = git://github.com/rstacruz/sparkup.git
+    ignore = dirty
 [submodule ".vim/bundle/snipmate"]
 	path = .vim/bundle/snipmate
 	url = git://github.com/garbas/vim-snipmate.git
+    ignore = dirty
 [submodule ".vim/bundle/tlib_vim"]
 	path = .vim/bundle/tlib_vim
 	url = git://github.com/tomtom/tlib_vim.git
+    ignore = dirty
 [submodule ".vim/bundle/addon-mw-utils"]
 	path = .vim/bundle/addon-mw-utils
 	url = git://github.com/MarcWeber/vim-addon-mw-utils.git
+    ignore = dirty
 [submodule ".vim/bundle/snipmate-snippets"]
 	path = .vim/bundle/snipmate-snippets
 	url = git://github.com/honza/snipmate-snippets.git
+    ignore = dirty
 [submodule ".vim/bundle/speeddating"]
 	path = .vim/bundle/speeddating
 	url = git://github.com/tpope/vim-speeddating.git
+    ignore = dirty
 [submodule ".vim/bundle/endwise"]
 	path = .vim/bundle/endwise
 	url = git://github.com/tpope/vim-endwise.git
-[submodule ".vim/bundle/afterimage"]
-	path = .vim/bundle/afterimage
-	url = git://github.com/tpope/vim-afterimage.git
     ignore = dirty
 [submodule ".vim/bundle/ragtag"]
 	path = .vim/bundle/ragtag
@@ -48,9 +53,7 @@
 [submodule ".vim/bundle/ruby"]
 	path = .vim/bundle/ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
-[submodule ".vim/bundle/supertab"]
-	path = .vim/bundle/supertab
-	url = git://github.com/ervandew/supertab.git
+    ignore = dirty
 [submodule ".vim/bundle/ShowMarks"]
 	path = .vim/bundle/ShowMarks
 	url = git://github.com/vim-scripts/ShowMarks.git
@@ -62,41 +65,36 @@
 [submodule ".vim/bundle/SQLComplete.vim"]
 	path = .vim/bundle/SQLComplete.vim
 	url = git://github.com/vim-scripts/SQLComplete.vim.git
-[submodule ".vim/bundle/vsccommand"]
-	path = .vim/bundle/vsccommand
-	url = git://github.com/vim-scripts/vcscommand.vim.git
     ignore = dirty
 [submodule ".vim/bundle/HTML-AutoCloseTag"]
 	path = .vim/bundle/HTML-AutoCloseTag
 	url = git://github.com/vim-scripts/HTML-AutoCloseTag.git
-[submodule ".vim/bundle/delimitMate"]
-	path = .vim/bundle/delimitMate
-	url = git://github.com/Raimondi/delimitMate.git
+    ignore = dirty
 [submodule ".vim/bundle/c.vim"]
 	path = .vim/bundle/c.vim
 	url = git://github.com/HenningM/cvim-pathogen.git
     ignore = dirty
-[submodule ".vim/bundle/piv"]
-	path = .vim/bundle/piv
-	url = git://github.com/spf13/PIV.git
 [submodule ".vim/bundle/minibufexpl"]
 	path = .vim/bundle/minibufexpl
 	url = git://github.com/sontek/minibufexpl.vim.git
+    ignore = dirty
 [submodule ".vim/bundle/ack"]
 	path = .vim/bundle/ack
 	url = git://github.com/mileszs/ack.vim.git
+    ignore = dirty
 [submodule ".vim/bundle/gundo"]
 	path = .vim/bundle/gundo
 	url = git://github.com/sjl/gundo.vim.git
-[submodule ".vim/bundle/tasklist"]
-	path = .vim/bundle/tasklist
-	url = https://github.com/vim-scripts/TaskList.vim.git
+    ignore = dirty
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = git://github.com/scrooloose/syntastic.git
+    ignore = dirty
 [submodule ".vim/bundle/command-t"]
 	path = .vim/bundle/command-t
 	url = git://github.com/wincent/Command-T.git
+    ignore = dirty
 [submodule ".vim/bundle/python-mode"]
 	path = .vim/bundle/python-mode
 	url = https://github.com/klen/python-mode.git
+    ignore = dirty
