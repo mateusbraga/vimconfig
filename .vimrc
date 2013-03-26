@@ -170,7 +170,7 @@ set whichwrap=b,s,h,l,<,>,[,]  " backspace and cursor keys wrap to
 set scrolljump=5            " lines to scroll when cursor leaves screen
 
 if version >= 720
-    set colorcolumn=79
+    set colorcolumn=85
 endif
 
 """" Messages, Info, Status
@@ -355,7 +355,7 @@ let g:pymode_lint_write = 0
 " }}}
 
 " Ack {{{
-nmap <leader>a <Esc>:Ack
+nmap <leader>a <Esc>:Ack 
 set grepprg=ack         " replace the default grep program with ack
 " }}}
 
