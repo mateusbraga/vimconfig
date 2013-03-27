@@ -1,13 +1,7 @@
 "
 " https://github.com/mateusbraga/vim_mab/
-" ==========================================================
-" Dependencies - Libraries/Applications outside of vim
-" ==========================================================
-" Pep8 - http://pypi.python.org/pypi/pep8
-" Pyflakes
-" Ack
-" Rake & Ruby for command-t
-" nose, django-nose
+
+
 
 " Use vim settings, rather then vi settings (much better!)
 " This must be first, because it changes other options as a side effect.
@@ -319,6 +313,14 @@ let Tlist_Display_Tag_Scope=0
 
 " show TagList window on the right
 let Tlist_Use_Right_Window=1
+
+" }}}
+
+" Ctrlp {{{
+
+"Change the default mapping and the default command to invoke CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 " }}}
 
