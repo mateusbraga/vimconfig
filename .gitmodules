@@ -50,10 +50,6 @@
 	path = .vim/bundle/ruby
 	url = git://github.com/vim-ruby/vim-ruby.git
     ignore = dirty
-[submodule ".vim/bundle/ShowMarks"]
-	path = .vim/bundle/ShowMarks
-	url = git://github.com/vim-scripts/ShowMarks.git
-    ignore = dirty
 [submodule ".vim/bundle/taglist"]
 	path = .vim/bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
