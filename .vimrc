@@ -459,7 +459,10 @@ if has("autocmd")
         autocmd filetype python inoremap <buffer> <S-F5> <Esc>:w<CR>:!ipython %<CR>
 
         " Automatic insertion of breakpoints
-        autocmd filetype python nnoremap <buffer> <leader>bp :normal Oimport pdb; pdb.set_trace()<Esc>
+        autocmd filetype python nnoremap <buffer> <leader>bp :normal Oimport pdb; pdb.set_trace() ### XXX BREAKPOINT<Esc>
+
+        " Automatic insertion of embedded IPython
+        autocmd filetype python nnoremap <buffer> <leader>bi :normal Oimport IPython; IPython.embed() ### XXX IPython interpreter<Esc>
 
         " Toggling True/False
         autocmd filetype python nnoremap <silent> <C-t> mmviw:s/True\\|False/\={'True':'False','False':'True'}[submatch(0)]/<CR>`m:nohlsearch<CR>
@@ -532,27 +535,4 @@ set formatoptions-=o " don't start new lines w/ comment leader on pressing 'o'
 au filetype vim set formatoptions-=o
                      " somehow, during vim filetype detection, this gets set
                      " for vim files, so explicitly unset it again
-" }}}
-
-" noremap <leader><F5> :CheckSyntax<cr>
-" let g:checksyntax_auto = 1
-
-"comment out line(s) in visual mode -RB: If you do this, you can't
-"switch sides of the comment block in visual mode.
-"vmap  o  :call NERDComment(1, 'toggle')<CR>
-" let g:NERDShutUp=1
-
-" let b:match_ignorecase = 1
-" }
-
-" Debugging with VimDebugger {{{
-" map <F11> :DbgStepInto<CR>
-" map <F10> :DbgStepOver<CR>
-" map <S-F11> :DbgStepOut<CR>
-" map <F5> :DbgRun<CR>
-" map <F6> :DbgDetach<CR>
-" map <F8> :DbgToggleBreakpoint<CR>
-" map <S-F8> :DbgFlushBreakpoints<CR>
-" map <F9> :DbgRefreshWatch<CR>
-" map <S-F9> :DbgAddWatch<CR>
 " }}}
