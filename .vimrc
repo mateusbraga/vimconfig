@@ -296,8 +296,7 @@ nnoremap <F4> :bnext<CR>
 " Plugins {{{
 
 " TagList settings {{{
-nnoremap <leader>l :TlistClose<CR>:TlistToggle<CR>
-nnoremap <leader>L :TlistClose<CR>
+nnoremap <leader>l :TlistToggle<CR>
 
 " quit Vim when the TagList window is the last open window
 let Tlist_Exit_OnlyWindow=1         " quit when TagList is the last open window
