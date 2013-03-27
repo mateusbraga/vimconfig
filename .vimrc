@@ -331,10 +331,6 @@ if exists('*SyntasticStatuslineFlag')
 endif
 " }}}
 
-" Gundo {{{
-map <leader>g :GundoToggle<CR>
-" }}}
-
 " Python-mode {{{
 "Disable pylint checking every save
 let g:pymode_lint_write = 0
