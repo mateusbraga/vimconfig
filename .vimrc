@@ -227,6 +227,9 @@ nnoremap <leader>P "+P
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
+" Edit the ultisnips filetype snippets
+nnoremap <silent> <leader>es :let UltiSnipsEditSplit='vertical' \| UltiSnipsEdit<CR>
+
 " Clears the search register
 nnoremap <silent> <leader>/ :nohlsearch<CR>
 
