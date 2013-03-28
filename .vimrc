@@ -223,11 +223,6 @@ nnoremap <leader>Y "+yy
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 
-" Use ,d (or ,dd or ,dj or 20,dd) to delete a line without adding it to the
-" yanked stack (also, in visual mode)
-nnoremap <silent> <leader>d "_d
-vnoremap <silent> <leader>d "_d
-
 " Edit the vimrc file
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
@@ -326,9 +321,8 @@ if exists('*SyntasticStatuslineFlag')
 endif
 " }}}
 
-" Python-mode {{{
-"Disable pylint checking every save
-let g:pymode_lint_write = 0
+" Jedi {{{
+let g:jedi#use_tabs_not_buffers = 0
 " }}}
 
 " Ack {{{
