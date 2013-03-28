@@ -1,7 +1,4 @@
-"
 " https://github.com/mateusbraga/vim_mab/
-
-
 
 " Use vim settings, rather then vi settings (much better!)
 " This must be first, because it changes other options as a side effect.
@@ -65,8 +62,7 @@ nnoremap <leader>i :set list!<cr>
 " Toggle line numbers
 nnoremap <leader>N :setlocal number!<cr>
 
-" Thanks to Steve Losh for this liberating tip
-" See http://stevelosh.com/blog/2010/09/coming-home-to-vim
+" Use normal regex
 nnoremap / /\v
 vnoremap / /\v
 
@@ -137,8 +133,6 @@ set wildmode=list:full          " show a list when pressing tab and complete
                                 "    first full match
 set wildignore=*.swp,*.bak,*.pyc,*.class
 set title                       " change the terminal's title
-set visualbell                  " don't beep
-set noerrorbells                " don't beep
 set showcmd                     " show (partial) command in the last line of the screen
                                 "    this also shows visual selection info
 set nomodeline                  " disable mode lines (security measure)
@@ -149,7 +143,6 @@ set cursorline                  " underline the current line, for quick orientat
 set noautowrite                 " Never write a file unless I request it.
 set noautowriteall              " NEVER.
 set noautoread                  " Don't automatically re-read changed files.
-
 " }}}
 
 " VIM UI {
@@ -169,7 +162,8 @@ endif
 
 """" Messages, Info, Status
 set ls=2                    " allways show status line
-set vb t_vb=                " Disable all bells.  I hate ringing/flashing.
+set visualbell t_vb=                " Disable all bells.  I hate ringing/flashing.
+set noerrorbells
 set confirm                 " Y-N-C prompt if closing with unsaved changes.
 set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
@@ -260,16 +254,16 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <leader>v V`]
 
 " Make C-Space autocomplete
-if has("gui_running")
-    " C-Space seems to work under gVim on both Linux and win32
-    inoremap <C-Space> <C-n>
-else " no gui
-  if has("unix")
-    inoremap <Nul> <C-n>
-  else
-  " I have no idea of the name of Ctrl-Space elsewhere
-  endif
-endif
+"if has("gui_running")
+    "" C-Space seems to work under gVim on both Linux and win32
+    "inoremap <C-Space> <C-n>
+"else " no gui
+  "if has("unix")
+    "inoremap <Nul> <C-n>
+  "else
+  "" I have no idea of the name of Ctrl-Space elsewhere
+  "endif
+"endif
 
 " Conflict markers {{{
 " highlight conflict markers
@@ -360,10 +354,12 @@ if has("autocmd")
     augroup vim_files "{{{
         au!
 
-        " Bind <F1> to show the keyword under cursor
-        " general help can still be entered manually, with :h
-        autocmd filetype vim noremap <buffer> <F1> <Esc>:help <C-r><C-w><CR>
-        autocmd filetype vim noremap! <buffer> <F1> <Esc>:help <C-r><C-w><CR>
+        " Display vim help with <C-]>
+        autocmd filetype vim noremap <buffer> <C-]> <Esc>:help <C-r><C-w><CR>
+
+        autocmd filetype vim set formatoptions-=o
+                                " somehow, during vim filetype detection, this gets set
+                                " for vim files, so explicitly unset it again
     augroup end "}}}
 
     augroup txt_files "{{{
@@ -373,33 +369,6 @@ if has("autocmd")
         autocmd filetype txt setlocal textwidth
         autocmd filetype txt setlocal wrapmargin=2
     augroup end "}}}
-
-    augroup html_files "{{{
-        au!
-
-        " This function detects, based on HTML content, whether this is a
-        " Django template, or a plain HTML file, and sets filetype accordingly
-        fun! s:DetectHTMLVariant()
-            let n = 1
-            while n < 50 && n < line("$")
-                " check for django
-                if getline(n) =~ '{%\s*\(extends\|load\|block\|if\|for\|include\|trans\)\>'
-                    set ft=htmldjango.html
-                    return
-                endif
-                let n = n + 1
-            endwhile
-            " go with html
-            set ft=html
-        endfun
-
-        autocmd BufNewFile,BufRead *.html,*.htm,*.j2 call s:DetectHTMLVariant()
-
-        " Auto-closing of HTML/XML tags
-        let g:closetag_default_xml=1
-        autocmd filetype html,htmldjango let b:closetag_html_style=1
-        autocmd filetype html,xhtml,xml source ~/.vim/scripts/closetag.vim
-    augroup end " }}}
 
     augroup python_files "{{{
         au!
@@ -431,10 +400,6 @@ if has("autocmd")
         " But disable autowrapping as it is super annoying
         autocmd filetype python setlocal formatoptions-=t
 
-        " Folding for Python (uses syntax/python.vim for fold definitions)
-        "autocmd filetype python,rst setlocal nofoldenable
-        "autocmd filetype python setlocal foldmethod=expr
-
         " Python runners
         autocmd filetype python noremap <buffer> <F5> :w<CR>:!python %<CR>
         autocmd filetype python inoremap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
@@ -454,31 +419,37 @@ if has("autocmd")
         " autocmd BufWritePost *.py call Flake8()
     augroup end " }}}
 
-    augroup supervisord_files "{{{
-        au!
-
-        autocmd BufNewFile,BufRead supervisord.conf set ft=dosini
-    augroup end " }}}
-
-    augroup markdown_files "{{{
-        au!
-
-        autocmd filetype markdown noremap <buffer> <leader>p :w<CR>:!open -a Marked %<CR><CR>
-    augroup end " }}}
-
     augroup ruby_files "{{{
         au!
 
         autocmd filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
     augroup end " }}}
 
-    augroup rst_files "{{{
+    augroup html_files "{{{
         au!
 
-        " Auto-wrap text around 74 chars
-        autocmd filetype rst setlocal textwidth=74
-        autocmd filetype rst setlocal formatoptions+=nqt
-        autocmd filetype rst match ErrorMsg '\%>74v.\+'
+        " This function detects, based on HTML content, whether this is a
+        " Django template, or a plain HTML file, and sets filetype accordingly
+        fun! s:DetectHTMLVariant()
+            let n = 1
+            while n < 50 && n < line("$")
+                " check for django
+                if getline(n) =~ '{%\s*\(extends\|load\|block\|if\|for\|include\|trans\)\>'
+                    set ft=htmldjango.html
+                    return
+                endif
+                let n = n + 1
+            endwhile
+            " go with html
+            set ft=html
+        endfun
+
+        autocmd BufNewFile,BufRead *.html,*.htm,*.j2 call s:DetectHTMLVariant()
+
+        " Auto-closing of HTML/XML tags
+        let g:closetag_default_xml=1
+        autocmd filetype html,htmldjango let b:closetag_html_style=1
+        autocmd filetype html,xhtml,xml source ~/.vim/scripts/closetag.vim
     augroup end " }}}
 
     augroup css_files "{{{
@@ -497,16 +468,6 @@ if has("autocmd")
         " Toggling True/False
         autocmd filetype javascript nnoremap <silent> <C-t> mmviw:s/true\\|false/\={'true':'false','false':'true'}[submatch(0)]/<CR>`m:nohlsearch<CR>
     augroup end "}}}
-
-    augroup textile_files "{{{
-        au!
-
-        autocmd filetype textile set tw=78 wrap
-
-        " Render YAML front matter inside Textile documents as comments
-        autocmd filetype textile syntax region frontmatter start=/\%^---$/ end=/^---$/
-        autocmd filetype textile highlight link frontmatter Comment
-    augroup end "}}}
 endif
 " }}}
 
@@ -515,7 +476,4 @@ endif
 set cpoptions+=$     " when changing a line, don't redisplay, but put a '$' at
                      " the end during the change
 set formatoptions-=o " don't start new lines w/ comment leader on pressing 'o'
-au filetype vim set formatoptions-=o
-                     " somehow, during vim filetype detection, this gets set
-                     " for vim files, so explicitly unset it again
 " }}}
