@@ -26,10 +26,6 @@
 	path = .vim/bundle/taglist
 	url = git://github.com/vim-scripts/taglist.vim.git
     ignore = dirty
-[submodule ".vim/bundle/c.vim"]
-	path = .vim/bundle/c.vim
-	url = git://github.com/HenningM/cvim-pathogen.git
-    ignore = dirty
 [submodule ".vim/bundle/minibufexpl"]
 	path = .vim/bundle/minibufexpl
 	url = git://github.com/sontek/minibufexpl.vim.git
