@@ -1,14 +1,32 @@
 " https://github.com/mateusbraga/vim_mab/
 
-" Use vim settings, rather then vi settings (much better!)
-" This must be first, because it changes other options as a side effect.
 set nocompatible
-
-" Use pathogen to easily modify the runtime path to include all plugins under
-" the ~/.vim/bundle directory
 filetype off                    " force reloading *after* pathogen loaded
-execute pathogen#infect()
-"call pathogen#helptags()
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required!
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+"
+" original repos on github
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'rstacruz/sparkup'
+Bundle 'vim-scripts/taglist.vim'
+Bundle 'sontek/minibufexpl.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'scrooloose/syntastic'
+Bundle 'kien/ctrlp.vim'
+Bundle 'SirVer/ultisnips'
+Bundle 'davidhalter/jedi-vim'
+
+
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 syntax on
 
