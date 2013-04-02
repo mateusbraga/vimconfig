@@ -227,6 +227,9 @@ nnoremap <leader>P "+P
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
+" Edit the todo.txt file
+nnoremap <silent> <leader>et :e ~/todo.txt<CR>
+
 " Edit the ultisnips filetype snippets
 nnoremap <silent> <leader>es :let UltiSnipsEditSplit='vertical' \| UltiSnipsEdit<CR>
 
@@ -362,6 +365,7 @@ if has("autocmd")
     augroup txt_files "{{{
         au!
 
+        autocmd BufRead,BufNewFile *.txt setlocal filetype=txt
         autocmd filetype txt setlocal wrap
         autocmd filetype txt setlocal textwidth
         autocmd filetype txt setlocal wrapmargin=2
@@ -470,7 +474,7 @@ endif
 
 " Extra vi-compatibility {{{
 " set extra vi-compatible options
-set cpoptions+=$     " when changing a line, don't redisplay, but put a '$' at
+"set cpoptions+=$     " when changing a line, don't redisplay, but put a '$' at
                      " the end during the change
 set formatoptions-=o " don't start new lines w/ comment leader on pressing 'o'
 " }}}
