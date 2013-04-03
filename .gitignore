@@ -4,3 +4,5 @@
 .vim/.netrwhist
 .vim/UltiSnips
 .vim/spell
+!.vim/bundle/vundle
+.vim/bundle/*
