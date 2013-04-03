@@ -24,7 +24,8 @@ Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'SirVer/ultisnips'
-Bundle 'davidhalter/jedi-vim'
+"Bundle 'davidhalter/jedi-vim'
+Bundle 'Valloric/YouCompleteMe'
 
 
 filetype plugin indent on       " enable detection, plugins and indenting in one step
