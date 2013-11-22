@@ -28,6 +28,7 @@ Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'Rykka/riv.vim'
 Bundle 'mateusbraga/vim-gocode'
+Bundle 'mateusbraga/vim-spell-pt-br'
 "Bundle 'Blackrush/vim-gocode'
 
 "Bundle 'LaTeX-Box-Team/LaTeX-Box'
