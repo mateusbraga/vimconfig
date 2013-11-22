@@ -1,202 +1,54 @@
+" Author: Mateus Braga
 " https://github.com/mateusbraga/vim_mab/
+"
+" You will need to compile YouCompleteMe core. See the plugin page
 
 set nocompatible
-filetype off                    " force reloading *after* pathogen loaded
+filetype off
 
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" let Vundle manage Vundle
-" required!
+" let Vundle manage Vundle - required!
 Bundle 'gmarik/vundle'
 
-" My Bundles here:
-"
-" original repos on github
+
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'rstacruz/sparkup'
 Bundle 'vim-scripts/taglist.vim'
-Bundle 'sontek/minibufexpl.vim'
+"Bundle 'sontek/minibufexpl.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'SirVer/ultisnips'
 "Bundle 'davidhalter/jedi-vim'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'Rykka/riv.vim'
+Bundle 'mateusbraga/vim-gocode'
+"Bundle 'Blackrush/vim-gocode'
+
+"Bundle 'LaTeX-Box-Team/LaTeX-Box'
+"let g:LatexBox_latexmk_options = "-pvc -pdf"
+
 
 
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 syntax on
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Change the mapleader from \ to ,
 let mapleader=","
 let maplocalleader="\\"
 
-" Editing behaviour {{{
-set showmode                    " always show what mode we're currently editing in
-set nowrap                      " don't wrap lines
-set tabstop=4                   " a tab is four spaces
-set softtabstop=4               " when hitting <BS>, pretend like a tab is removed, even if spaces
-set expandtab                   " expand tabs by default (overloadable per file type later)
-set shiftwidth=4                " number of spaces to use for autoindenting
-set shiftround                  " use multiple of shiftwidth when indenting with '<' and '>'
-set backspace=indent,eol,start  " allow backspacing over everything in insert mode
-set autoindent                  " always set autoindenting on
-set copyindent                  " copy the previous indentation on autoindenting
-set number                      " always show line numbers
-set showmatch                   " set show matching parenthesis
-set ignorecase                  " ignore case when searching
-set smartcase                   " ignore case if search pattern is all lowercase,
-                                "    case-sensitive otherwise
-set smarttab                    " insert tabs on the start of a line according to
-                                "    shiftwidth, not tabstop
-set scrolloff=4                 " keep 4 lines off the edges of the screen when scrolling
-set virtualedit=all             " allow the cursor to go in to "invalid" places
-set hlsearch                    " highlight search terms
-set incsearch                   " show search matches as you type
-set gdefault                    " search/replace "globally" (on a line) by default
-set listchars=tab:▸\ ,trail:·,extends:#,nbsp:·
-
-set nolist                      " don't show invisible characters by default,
-                                " but it is enabled for some file types (see later)
-set pastetoggle=<F2>            " when in insert mode, press <F2> to go to
-                                "    paste mode, where you can paste mass data
-                                "    that won't be autoindented
-set mouse=a                     " enable using the mouse if terminal emulator
-                                "    supports it (xterm does)
-set fileformats="unix,dos,mac"
-set formatoptions+=1            " When wrapping paragraphs, don't end lines
-                                "    with 1-letter words (looks stupid)
-
-set nrformats=                  " make <C-a> and <C-x> play well with
-                                "    zero-padded numbers (i.e. don't consider
-                                "    them octal or hex)
-
-" Toggle show/hide invisible chars
-nnoremap <leader>i :set list!<cr>
-
-" Toggle line numbers
-nnoremap <leader>N :setlocal number!<cr>
-
-" Use normal regex
-nnoremap / /\v
-vnoremap / /\v
-
-" Speed up scrolling of the viewport slightly
-nnoremap <C-e> 2<C-e>
-nnoremap <C-y> 2<C-y>
-" }}}
-
-" Folding rules {{{
-set foldenable                  " enable folding
-set foldcolumn=2                " add a fold column
-set foldmethod=marker           " detect triple-{ style fold markers
-set foldlevelstart=99           " start out with everything folded
-set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
-                                " which commands trigger auto-unfold
-function! MyFoldText()
-    let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 4
-    return line . ' …' . repeat(" ",fillcharcount) . foldedlinecount . ' '
-endfunction
-set foldtext=MyFoldText()
-" }}}
-
-" Editor layout {{{
-colorscheme desert          " How each default identifier look on vim
-set termencoding=utf-8
-set encoding=utf-8
-set lazyredraw                  " don't update the display while executing macros
-set laststatus=2                " tell VIM to always put a status line in, even
-                                "    if there is only one window
-set cmdheight=2                 " use a status bar that is 2 rows high
-" }}}
-
-" Vim behaviour {{{
-set hidden                      " hide buffers instead of closing them this
-                                "    means that the current buffer can be put
-                                "    to background without being written; and
-                                "    that marks and undo history are preserved
-set switchbuf=useopen           " reveal already opened files from the
-                                " quickfix window instead of opening new
-                                " buffers
-set history=1000                " remember more commands and search history
-set undolevels=1000             " use many muchos levels of undo
-if v:version >= 730
-    set undofile                " keep a persistent backup file
-    set undodir=~/.vim/.undo,~/tmp,/tmp
-endif
-set nobackup                    " do not keep backup files, it's 70's style cluttering
-set noswapfile                  " do not write annoying intermediate swap files,
-                                "    who did ever restore from swap files anyway?
-set directory=~/.vim/.tmp,~/tmp,/tmp
-                                " store swap files in one of these directories
-                                "    (in case swapfile is ever turned on)
-set viminfo='20,\"80            " read/write a .viminfo file, don't store more
-                                "    than 80 lines of registers
-set wildmenu                    " make tab completion for files/buffers act like bash
-set wildmode=list:full          " show a list when pressing tab and complete
-                                "    first full match
-set wildignore=*.swp,*.bak,*.pyc,*.class
-set title                       " change the terminal's title
-set showcmd                     " show (partial) command in the last line of the screen
-                                "    this also shows visual selection info
-set nomodeline                  " disable mode lines (security measure)
-"set ttyfast                     " always use a fast terminal
-set cursorline                  " underline the current line, for quick orientation
-
-"""" Reading/Writing
-set noautowrite                 " Never write a file unless I request it.
-set noautowriteall              " NEVER.
-set noautoread                  " Don't automatically re-read changed files.
-" }}}
-
-" VIM UI {
-set nostartofline           " Avoid moving cursor to BOL when jumping around
-set linebreak               " don't wrap textin the middle of a word
-
-set matchpairs+=<:>         " show matching <> (html mainly) as well
-
-set winminheight=0          " windows can be 0 line high
-
-set whichwrap=b,s,h,l,<,>,[,]  " backspace and cursor keys wrap to
-set scrolljump=5            " lines to scroll when cursor leaves screen
-
-if version >= 720
-    set colorcolumn=85
-endif
-
-"""" Messages, Info, Status
-set ls=2                    " allways show status line
-set visualbell t_vb=                " Disable all bells.  I hate ringing/flashing.
-set noerrorbells
-set confirm                 " Y-N-C prompt if closing with unsaved changes.
-set report=0                " : commands always print changed line count.
-set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
-"set ruler                   " Show some info, even without statuslines.
-set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
-set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
-
-" Shortcut mappings {{{
-
 " Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
 nnoremap ; :
 nnoremap <leader>; ;
-" Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
+
 " Avoid accidental hits of <F1> while aiming for <Esc>
 noremap! <F1> <Esc>
 
@@ -204,7 +56,7 @@ noremap! <F1> <Esc>
 nnoremap <leader>q :call MyBufferDelete()<CR>
 
 function! MyBufferDelete()
-    if (len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1) 
+    if (len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1)
         q
     else
         bd
@@ -267,23 +119,13 @@ vnoremap <Tab> %
 nnoremap <Space> za
 vnoremap <Space> za
 
-" Remove trailing whitespace on <leader>S TODO_FORMAT
+" Remove trailing whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Reselect text that was just pasted with ,v
 nnoremap <leader>v V`]
 
-" Make C-Space autocomplete
-"if has("gui_running")
-    "" C-Space seems to work under gVim on both Linux and win32
-    "inoremap <C-Space> <C-n>
-"else " no gui
-  "if has("unix")
-    "inoremap <Nul> <C-n>
-  "else
-  "" I have no idea of the name of Ctrl-Space elsewhere
-  "endif
-"endif
+
 
 " Conflict markers {{{
 " highlight conflict markers
@@ -297,9 +139,157 @@ inoremap <F2> <C-R>=strftime("%F %T%z")<CR>
 
 nnoremap <F3> :bprevious<CR>
 nnoremap <F4> :bnext<CR>
+vnoremap <F3> <ESC>:bprevious<CR>
+vnoremap <F4> <ESC>:bnext<CR>
 
 " }}}
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Toggle show/hide invisible chars
+"nnoremap <leader>i :set list!<cr>
+
+" Toggle line numbers
+"nnoremap <leader>N :setlocal number!<cr>
+
+" Use normal regex
+nnoremap / /\v
+vnoremap / /\v
+
+" Speed up scrolling of the viewport slightly
+nnoremap <C-e> 2<C-e>
+nnoremap <C-y> 2<C-y>
+" }}}
+
+" Folding rules {{{
+set foldenable                  " enable folding
+set foldcolumn=2                " add a fold column
+set foldmethod=marker           " detect triple-{ style fold markers
+set foldlevelstart=99           " start out with everything folded
+set foldopen=block,hor,insert,jump,mark,percent,quickfix,search,tag,undo
+                                " which commands trigger auto-unfold
+function! MyFoldText()
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 4
+    return line . ' …' . repeat(" ",fillcharcount) . foldedlinecount . ' '
+endfunction
+set foldtext=MyFoldText()
+" }}}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+colorscheme desert          " How each default identifier look on vim
+"if exists("&colorcolumn")
+    "set colorcolumn=75
+"endif
+set termencoding=utf-8
+set encoding=utf-8
+set laststatus=2                " tell VIM to always put a status line in, even
+                                "    if there is only one window
+set mouse=a                     " enable using the mouse if terminal emulator
+                                "    supports it (xterm does)
+
+set hidden                      " hide buffers instead of closing them this
+                                "    means that the current buffer can be put
+                                "    to background without being written; and
+                                "    that marks and undo history are preserved
+set switchbuf=useopen           " reveal already opened files from the
+                                " quickfix window instead of opening new
+                                " buffers
+set history=1000                " remember more commands and search history
+set undolevels=1000             " use many muchos levels of undo
+if v:version >= 730
+    set undofile                " keep a persistent backup file
+    set undodir=~/.vim/.undo,~/tmp,/tmp
+endif
+set nobackup                    " do not keep backup files, it's 70's style cluttering
+set noswapfile                  " do not write annoying intermediate swap files,
+                                "    who did ever restore from swap files anyway?
+set directory=~/.vim/.tmp,~/tmp,/tmp
+                                " store swap files in one of these directories (in case swapfile is ever turned on)
+set viminfo='20,\"80            " read/write a .viminfo file, don't store more than 80 lines of registers
+set wildmenu                    " make tab completion for files/buffers act like bash
+set wildmode=list:full          " show a list when pressing tab and complete
+                                "    first full match
+set wildignore=*.swp,*.bak,*.pyc,*.class,*.test,*.aux
+
+set title                       " change the terminal's title
+set showcmd                     " show (partial) command in the last line of the screen
+                                "    this also shows visual selection info
+set nomodeline                  " disable mode lines (security measure)
+set cursorline                  " underline the current line, for quick orientation
+
+set number                      " always show line numbers
+
+set tabstop=4                   " a tab is four spaces
+set softtabstop=4               " when hitting <BS>, pretend like a tab is removed, even if spaces
+set expandtab                   " expand tabs by default (overloadable per file type later)
+set shiftwidth=4                " number of spaces to use for autoindenting
+set shiftround                  " use multiple of shiftwidth when indenting with '<' and '>'
+set autoindent                  " always set autoindenting on
+set copyindent                  " copy the previous indentation on autoindenting
+set smarttab                    " insert tabs on the start of a line according to
+                                "    shiftwidth, not tabstop
+
+set hlsearch                    " highlight search terms
+set incsearch                   " show search matches as you type
+set gdefault                    " search/replace "globally" (on a line) by default
+set ignorecase
+set smartcase                   " ignore case if search pattern is all lowercase,
+                                "    case-sensitive otherwise
+
+
+set listchars=tab:▸\ ,trail:·,extends:#,nbsp:·
+set nolist                      " don't show invisible characters by default,
+                                " but it is enabled for some file types (see later)
+
+"set virtualedit=all             " allow the cursor to go in to "invalid" places
+
+set pastetoggle=<F2>            " when in insert mode, press <F2> to go to
+                                "    paste mode, where you can paste mass data
+                                "    that won't be autoindented
+set formatoptions-=o " don't start new lines w/ comment leader on pressing 'o'
+set formatoptions+=1            " When wrapping paragraphs, don't end lines
+                                "    with 1-letter words (looks stupid)
+set nrformats=                  " make <C-a> and <C-x> play well with
+                                "    zero-padded numbers (i.e. don't consider
+                                "    them octal or hex)
+
+set nostartofline           " Avoid moving cursor to BOL when jumping around
+set linebreak               " don't wrap textin the middle of a word
+
+set fileformats="unix,dos,mac"
+
+set showmatch                   " set show matching parenthesis
+set matchpairs+=<:>         " show matching <> (html mainly) as well
+
+set winminheight=0          " windows can be 0 line high
+
+set backspace=indent,eol,start  " allow backspacing over everything in insert mode
+set whichwrap=b,s,h,l,<,>,[,]  " backspace and cursor keys wrap to
+
+set scrolljump=5            " lines to scroll when cursor leaves screen
+set scrolloff=4                 " keep 4 lines off the edges of the screen when scrolling
+
+set visualbell
+
+set confirm                 " Y-N-C prompt if closing with unsaved changes.
+set report=0                " : commands always print changed line count.
+set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
+set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Plugins {{{
 
@@ -346,13 +336,29 @@ if exists('*SyntasticStatuslineFlag')
 endif
 " }}}
 
-" Jedi {{{
-let g:jedi#use_tabs_not_buffers = 0
-" }}}
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<c-j>"
 
 " Ack {{{
-nmap <leader>a <Esc>:Ack 
+nmap <leader>a <Esc>:Ack
 set grepprg=ack         " replace the default grep program with ack
+" }}}
+
+" YouCompleteMe {{{
+
+" Make C-Space autocomplete
+if has("gui_running")
+    " C-Space seems to work under gVim on both Linux and win32
+    "inoremap <C-Space> <C-n>
+    let g:ycm_key_invoke_completion = '<C-Space>'
+else " no gui
+  if has("unix")
+    "inoremap <Nul> <C-n>
+    let g:ycm_key_invoke_completion = '<Nul>'
+  else
+  " I have no idea of the name of Ctrl-Space elsewhere
+  endif
+endif
 " }}}
 
 " }}}
@@ -386,30 +392,23 @@ if has("autocmd")
 
         autocmd BufRead,BufNewFile *.txt setlocal filetype=txt
         autocmd filetype txt setlocal wrap
-        autocmd filetype txt setlocal textwidth
-        autocmd filetype txt setlocal wrapmargin=2
+        autocmd filetype txt setlocal textwidth=72
+        autocmd filetype txt setlocal spell
+        autocmd filetype txt setlocal spelllang=en,pt_br
+    augroup end "}}}
+
+    augroup rst_files "{{{
+        au!
+
+        autocmd BufRead,BufNewFile *.rst setlocal filetype=rst
+        autocmd filetype rst setlocal wrap
+        autocmd filetype rst setlocal textwidth=74
+        autocmd filetype rst setlocal spell
+        autocmd filetype rst setlocal spelllang=en,pt_br
     augroup end "}}}
 
     augroup python_files "{{{
         au!
-
-        " This function detects, based on Python content, whether this is a
-        " Django file, which may enabling snippet completion for it
-        fun! s:DetectPythonVariant()
-            let n = 1
-            while n < 50 && n < line("$")
-                " check for django
-                if getline(n) =~ 'import\s\+\<django\>' || getline(n) =~ 'from\s\+\<django\>\s\+import'
-                    set ft=python.django
-                    "set syntax=python
-                    return
-                endif
-                let n = n + 1
-            endwhile
-            " go with html
-            set ft=python
-        endfun
-        autocmd BufNewFile,BufRead *.py call s:DetectPythonVariant()
 
         " PEP8 compliance (set 1 tab = 4 chars explicitly, even if set
         " earlier, as it is important)
@@ -439,61 +438,38 @@ if has("autocmd")
         " autocmd BufWritePost *.py call Flake8()
     augroup end " }}}
 
-    augroup ruby_files "{{{
+    augroup go_files "{{{
         au!
 
-        autocmd filetype ruby setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
+        autocmd filetype go noremap <buffer> <F5> :w<CR>:!go install %<CR>
+        autocmd filetype go inoremap <buffer> <F5> <Esc>:w<CR>:!go install %<CR>
+        autocmd filetype go noremap <buffer> <S-F5> :w<CR>:!go run %<CR>
+        autocmd filetype go inoremap <buffer> <S-F5> <Esc>:w<CR>:!go run %<CR>
+        autocmd filetype go noremap <buffer> <F7> :w<CR>:!go test<CR>
+        autocmd filetype go noremap <buffer> <F8> :w<CR>:%!gofmt<CR>
+
+        "autocmd BufWritePre *.go :%!gofmt
+
     augroup end " }}}
 
-    augroup html_files "{{{
+    augroup latex_files "{{{
         au!
 
-        " This function detects, based on HTML content, whether this is a
-        " Django template, or a plain HTML file, and sets filetype accordingly
-        fun! s:DetectHTMLVariant()
-            let n = 1
-            while n < 50 && n < line("$")
-                " check for django
-                if getline(n) =~ '{%\s*\(extends\|load\|block\|if\|for\|include\|trans\)\>'
-                    set ft=htmldjango.html
-                    return
-                endif
-                let n = n + 1
-            endwhile
-            " go with html
-            set ft=html
-        endfun
+        autocmd BufRead,BufNewFile *.tex setlocal filetype=tex
+        autocmd filetype tex,bib noremap <buffer> <F5> :w<CR>:!make<CR>
+        autocmd filetype tex,bib setlocal spell
+        "autocmd filetype tex,bib setlocal spelllang=pt_br,en
+        autocmd filetype tex,bib setlocal spelllang=pt,en
+        "autocmd BufWritePost *.tex :!latexmk -pdf
 
-        autocmd BufNewFile,BufRead *.html,*.htm,*.j2 call s:DetectHTMLVariant()
-
-        " Auto-closing of HTML/XML tags
-        let g:closetag_default_xml=1
-        autocmd filetype html,htmldjango let b:closetag_html_style=1
-        autocmd filetype html,xhtml,xml source ~/.vim/scripts/closetag.vim
+        autocmd filetype tex syn region texZone      start="\\begin{verbatim}"           end="\\end{verbatim}\|%stopzone\>"  contains=@Spell
+        autocmd filetype tex syn region texZone      start="\\begin{code}"               end="\\end{code}\|%stopzone\>"  contains=@Spell
+        " listings package:
+        autocmd filetype tex syn region texZone      start="\\begin{lstlisting}"         end="\\end{lstlisting}\|%stopzone\>"    contains=@NoSpell
+        " moreverb package:
+        autocmd filetype tex syn region texZone      start="\\begin{verbatimtab}"        end="\\end{verbatimtab}\|%stopzone\>"   contains=@Spell
+        autocmd filetype tex syn region texZone      start="\\begin{verbatimwrite}"      end="\\end{verbatimwrite}\|%stopzone\>" contains=@Spell
+        autocmd filetype tex syn region texZone      start="\\begin{boxedverbatim}"      end="\\end{boxedverbatim}\|%stopzone\>" contains=@Spell
     augroup end " }}}
-
-    augroup css_files "{{{
-        au!
-
-        autocmd filetype css,less setlocal foldmethod=marker foldmarker={,}
-    augroup end "}}}
-
-    augroup javascript_files "{{{
-        au!
-
-        autocmd filetype javascript setlocal expandtab
-        autocmd filetype javascript setlocal listchars=trail:·,extends:#,nbsp:·
-        autocmd filetype javascript setlocal foldmethod=marker foldmarker={,}
-
-        " Toggling True/False
-        autocmd filetype javascript nnoremap <silent> <C-t> mmviw:s/true\\|false/\={'true':'false','false':'true'}[submatch(0)]/<CR>`m:nohlsearch<CR>
-    augroup end "}}}
 endif
-" }}}
-
-" Extra vi-compatibility {{{
-" set extra vi-compatible options
-"set cpoptions+=$     " when changing a line, don't redisplay, but put a '$' at
-                     " the end during the change
-set formatoptions-=o " don't start new lines w/ comment leader on pressing 'o'
 " }}}
