@@ -12,32 +12,21 @@ call vundle#rc()
 " let Vundle manage Vundle - required!
 Bundle 'gmarik/vundle'
 
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-repeat'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'rstacruz/sparkup'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'mileszs/ack.vim'
+Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'SirVer/ultisnips'
-Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'mileszs/ack.vim'
 Bundle 'mateusbraga/vim-gocode'
 Bundle 'mateusbraga/vim-spell-pt-br'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
+Bundle 'vim-scripts/taglist.vim'
 Bundle 'vim-scripts/sudo.vim'
 
-
-"Bundle 'sontek/minibufexpl.vim'
-"Bundle 'davidhalter/jedi-vim'
-"Bundle 'Rykka/riv.vim'
-"Bundle 'bling/vim-airline'
-"Bundle 'Blackrush/vim-gocode'
-
-"Bundle 'LaTeX-Box-Team/LaTeX-Box'
-"let g:LatexBox_latexmk_options = "-pvc -pdf"
-
-
+"Bundle 'rstacruz/sparkup'
 
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 syntax on
@@ -129,14 +118,12 @@ nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " Reselect text that was just pasted with ,v
 nnoremap <leader>v V`]
 
-
-
 " Conflict markers {{{
 " highlight conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 " shortcut to jump to next conflict marker
-nnoremap <silent> <leader>c /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
+nnoremap <silent> <leader>x /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
 " }}}
 
 inoremap <F2> <C-R>=strftime("%F %T%z")<CR>
