@@ -12,23 +12,26 @@ call vundle#rc()
 " let Vundle manage Vundle - required!
 Bundle 'gmarik/vundle'
 
-
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'rstacruz/sparkup'
 Bundle 'vim-scripts/taglist.vim'
-"Bundle 'sontek/minibufexpl.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'SirVer/ultisnips'
-"Bundle 'davidhalter/jedi-vim'
 Bundle 'Valloric/YouCompleteMe'
-"Bundle 'Rykka/riv.vim'
 Bundle 'mateusbraga/vim-gocode'
 Bundle 'mateusbraga/vim-spell-pt-br'
+Bundle 'vim-scripts/sudo.vim'
+
+
+"Bundle 'sontek/minibufexpl.vim'
+"Bundle 'davidhalter/jedi-vim'
+"Bundle 'Rykka/riv.vim'
+"Bundle 'bling/vim-airline'
 "Bundle 'Blackrush/vim-gocode'
 
 "Bundle 'LaTeX-Box-Team/LaTeX-Box'
