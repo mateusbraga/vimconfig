@@ -26,7 +26,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'SirVer/ultisnips'
 "Bundle 'davidhalter/jedi-vim'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'Rykka/riv.vim'
+"Bundle 'Rykka/riv.vim'
 Bundle 'mateusbraga/vim-gocode'
 Bundle 'mateusbraga/vim-spell-pt-br'
 "Bundle 'Blackrush/vim-gocode'
@@ -338,7 +338,24 @@ endif
 " }}}
 
 " Ultisnips
-let g:UltiSnipsExpandTrigger="<c-j>"
+function! g:UltiSnips_Complete()
+    call UltiSnips_ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips_JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-e>"
 
 " Ack {{{
 nmap <leader>a <Esc>:Ack
