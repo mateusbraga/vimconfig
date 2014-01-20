@@ -1,8 +1,2 @@
-*~
-*.swp
-.vim/view/*
-.vim/.netrwhist
-.vim/UltiSnips
-.vim/spell
-!.vim/bundle/vundle
 .vim/bundle/*
+!.vim/bundle/vundle

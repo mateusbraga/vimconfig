@@ -25,8 +25,12 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'vim-scripts/taglist.vim'
 Bundle 'vim-scripts/sudo.vim'
+Bundle 'Raimondi/delimitMate'
+Bundle 'dgryski/vim-godef'
 
 "Bundle 'rstacruz/sparkup'
+
+set spellfile=~/.vim/spell/en.utf-8.add
 
 filetype plugin indent on       " enable detection, plugins and indenting in one step
 syntax on
@@ -279,7 +283,6 @@ set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Plugins {{{
@@ -446,7 +449,7 @@ if has("autocmd")
         " autocmd BufWritePost *.py call Flake8()
     augroup end " }}}
 
-    augroup go_files "{{{
+    augroup go_files "{{{ golang
         au!
 
         autocmd filetype go noremap <buffer> <F5> :w<CR>:!go install %<CR>
@@ -454,9 +457,11 @@ if has("autocmd")
         autocmd filetype go noremap <buffer> <S-F5> :w<CR>:!go run %<CR>
         autocmd filetype go inoremap <buffer> <S-F5> <Esc>:w<CR>:!go run %<CR>
         autocmd filetype go noremap <buffer> <F7> :w<CR>:!go test<CR>
-        autocmd filetype go noremap <buffer> <F8> :w<CR>:%!gofmt<CR>
 
-        "autocmd BufWritePre *.go :%!gofmt
+        autocmd filetype go noremap <buffer> <F8> :Fmt<CR>
+        autocmd filetype go inoremap <buffer> <F8> <Esc>:Fmt<CR>
+
+        "autocmd filetype go au BufWritePre <buffer> Fmt
 
     augroup end " }}}
 
