@@ -16,18 +16,19 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 Bundle 'kien/ctrlp.vim'
 Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'mileszs/ack.vim'
 Bundle 'mateusbraga/vim-gocode'
 Bundle 'mateusbraga/vim-spell-pt-br'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'vim-scripts/taglist.vim'
 Bundle 'vim-scripts/sudo.vim'
 Bundle 'Raimondi/delimitMate'
 Bundle 'dgryski/vim-godef'
 
+"Bundle 'tpope/vim-surround'
 "Bundle 'rstacruz/sparkup'
 
 set spellfile=~/.vim/spell/en.utf-8.add
@@ -330,48 +331,15 @@ if exists('*SyntasticStatuslineFlag')
 endif
 " }}}
 
-" Ultisnips
-function! g:UltiSnips_Complete()
-    call UltiSnips_ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips_JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
-
-au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-e>"
+" Ultisnips {{{
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" }}}
 
 " Ack {{{
 nmap <leader>a <Esc>:Ack
 set grepprg=ack         " replace the default grep program with ack
-" }}}
-
-" YouCompleteMe {{{
-
-" Make C-Space autocomplete
-if has("gui_running")
-    " C-Space seems to work under gVim on both Linux and win32
-    "inoremap <C-Space> <C-n>
-    let g:ycm_key_invoke_completion = '<C-Space>'
-else " no gui
-  if has("unix")
-    "inoremap <Nul> <C-n>
-    let g:ycm_key_invoke_completion = '<Nul>'
-  else
-  " I have no idea of the name of Ctrl-Space elsewhere
-  endif
-endif
-" }}}
-
 " }}}
 
 " Filetype specific handling {{{
@@ -452,15 +420,16 @@ if has("autocmd")
     augroup go_files "{{{ golang
         au!
 
-        autocmd filetype go noremap <buffer> <F5> :w<CR>:!go install %<CR>
-        autocmd filetype go inoremap <buffer> <F5> <Esc>:w<CR>:!go install %<CR>
+        autocmd filetype go noremap <buffer> <F5> :w<CR>:!go install ./...<CR>
+        autocmd filetype go inoremap <buffer> <F5> <Esc>:w<CR>:!go install ./...<CR>
         autocmd filetype go noremap <buffer> <S-F5> :w<CR>:!go run %<CR>
         autocmd filetype go inoremap <buffer> <S-F5> <Esc>:w<CR>:!go run %<CR>
-        autocmd filetype go noremap <buffer> <F7> :w<CR>:!go test<CR>
+        autocmd filetype go noremap <buffer> <F7> :w<CR>:!go test ./...<CR>
 
         autocmd filetype go noremap <buffer> <F8> :Fmt<CR>
         autocmd filetype go inoremap <buffer> <F8> <Esc>:Fmt<CR>
 
+        autocmd FileType go let b:delimitMate_matchpairs = "(:),[:],{:}"
         "autocmd filetype go au BufWritePre <buffer> Fmt
 
     augroup end " }}}
