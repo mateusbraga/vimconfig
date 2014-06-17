@@ -7,34 +7,36 @@ set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 " let Vundle manage Vundle - required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'scrooloose/syntastic'
-Bundle 'kien/ctrlp.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'mileszs/ack.vim'
-Bundle 'mateusbraga/vim-gocode'
-Bundle 'mateusbraga/vim-spell-pt-br'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-repeat'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'vim-scripts/sudo.vim'
-Bundle 'Raimondi/delimitMate'
-Bundle 'dgryski/vim-godef'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mileszs/ack.vim'
+Plugin 'mateusbraga/vim-spell-pt-br'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'vim-scripts/taglist.vim'
+Plugin 'vim-scripts/sudo.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'dgryski/vim-godef'
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+"Plugin 'mateusbraga/vim-gocode'
 
-"Bundle 'tpope/vim-surround'
-"Bundle 'rstacruz/sparkup'
+call vundle#end()
+filetype plugin indent on
+
+
+syntax on
 
 set spellfile=~/.vim/spell/en.utf-8.add
-
-filetype plugin indent on       " enable detection, plugins and indenting in one step
-syntax on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -338,7 +340,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " }}}
 
 " Ack {{{
-nmap <leader>a <Esc>:Ack
+nmap <leader>a <Esc>:Ack 
 set grepprg=ack         " replace the default grep program with ack
 " }}}
 
@@ -432,6 +434,10 @@ if has("autocmd")
         autocmd FileType go let b:delimitMate_matchpairs = "(:),[:],{:}"
         "autocmd filetype go au BufWritePre <buffer> Fmt
 
+    augroup end " }}}
+
+    augroup markdown_files "{{{
+        au BufRead,BufNewFile *.md set filetype=markdown
     augroup end " }}}
 
     augroup latex_files "{{{
