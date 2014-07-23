@@ -28,7 +28,6 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'dgryski/vim-godef'
 Plugin 'jnwhiteh/vim-golang'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
-"Plugin 'mateusbraga/vim-gocode'
 
 call vundle#end()
 filetype plugin indent on
