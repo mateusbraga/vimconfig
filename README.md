@@ -13,3 +13,9 @@ What to do:
     cd
     ln -s (vimconfig)/.vim .vim
     ln -s (vimconfig)/.vimrc .vimrc
+
+Install gocode
+
+    go get -u github.com/nsf/gocode
+
+Compile YouCompleteMe - See [](https://github.com/Valloric/YouCompleteMe)
