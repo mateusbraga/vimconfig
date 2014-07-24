@@ -7,15 +7,14 @@ Lately, I have been using vim with these languagens: C and Go
 ---
 
 What to do:
-
-    git clone --recursive https://github.com/mateusbraga/vimconfig
-
     cd
-    ln -s (vimconfig)/.vim .vim
-    ln -s (vimconfig)/.vimrc .vimrc
+    git clone --recursive https://github.com/mateusbraga/vimconfig
+    ln -s vimconfig/.vim .vim
+    ln -s vimconfig/.vimrc .vimrc
+    vim +PluginInstall +qall
 
-Install gocode
+Install gocode (assuming $GOPATH/bin is in $PATH)
 
     go get -u github.com/nsf/gocode
 
-Compile YouCompleteMe - See [](https://github.com/Valloric/YouCompleteMe)
+Compile YouCompleteMe - See [https://github.com/Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
