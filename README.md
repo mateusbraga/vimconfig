@@ -7,6 +7,7 @@ Lately, I have been using vim with these languagens: C and Go
 ---
 
 What to do:
+
     cd
     git clone --recursive https://github.com/mateusbraga/vimconfig
     ln -s vimconfig/.vim .vim
