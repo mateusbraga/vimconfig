@@ -350,19 +350,19 @@ if has("autocmd")
         au!
 
         " Show invisible characters in all of these files
-        autocmd filetype vim setlocal list
-        autocmd filetype python,rst setlocal list
-        autocmd filetype ruby setlocal list
-        autocmd filetype javascript,css setlocal list
+        autocmd FileType vim setlocal list
+        autocmd FileType python,rst setlocal list
+        autocmd FileType ruby setlocal list
+        autocmd FileType javascript,css setlocal list
     augroup end "}}}
 
     augroup vim_files "{{{
         au!
 
         " Display vim help with <C-]>
-        autocmd filetype vim noremap <buffer> <C-]> <Esc>:help <C-r><C-w><CR>
+        autocmd FileType vim noremap <buffer> <C-]> <Esc>:help <C-r><C-w><CR>
 
-        autocmd filetype vim set formatoptions-=o
+        autocmd FileType vim set formatoptions-=o
                                 " somehow, during vim filetype detection, this gets set
                                 " for vim files, so explicitly unset it again
     augroup end "}}}
@@ -371,20 +371,20 @@ if has("autocmd")
         au!
 
         autocmd BufRead,BufNewFile *.txt setlocal filetype=txt
-        autocmd filetype txt setlocal wrap
-        autocmd filetype txt setlocal textwidth=72
-        autocmd filetype txt setlocal spell
-        autocmd filetype txt setlocal spelllang=en,pt_br
+        autocmd FileType txt setlocal wrap
+        autocmd FileType txt setlocal textwidth=72
+        autocmd FileType txt setlocal spell
+        autocmd FileType txt setlocal spelllang=en,pt_br
     augroup end "}}}
 
     augroup rst_files "{{{
         au!
 
         autocmd BufRead,BufNewFile *.rst setlocal filetype=rst
-        autocmd filetype rst setlocal wrap
-        autocmd filetype rst setlocal textwidth=74
-        autocmd filetype rst setlocal spell
-        autocmd filetype rst setlocal spelllang=en,pt_br
+        autocmd FileType rst setlocal wrap
+        autocmd FileType rst setlocal textwidth=74
+        autocmd FileType rst setlocal spell
+        autocmd FileType rst setlocal spelllang=en,pt_br
     augroup end "}}}
 
     augroup python_files "{{{
@@ -392,27 +392,27 @@ if has("autocmd")
 
         " PEP8 compliance (set 1 tab = 4 chars explicitly, even if set
         " earlier, as it is important)
-        autocmd filetype python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-        autocmd filetype python setlocal textwidth=78
-        autocmd filetype python match ErrorMsg '\%>120v.\+'
+        autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+        autocmd FileType python setlocal textwidth=78
+        autocmd FileType python match ErrorMsg '\%>120v.\+'
 
         " But disable autowrapping as it is super annoying
-        autocmd filetype python setlocal formatoptions-=t
+        autocmd FileType python setlocal formatoptions-=t
 
         " Python runners
-        autocmd filetype python noremap <buffer> <F5> :w<CR>:!python %<CR>
-        autocmd filetype python inoremap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
-        autocmd filetype python noremap <buffer> <S-F5> :w<CR>:!ipython %<CR>
-        autocmd filetype python inoremap <buffer> <S-F5> <Esc>:w<CR>:!ipython %<CR>
+        autocmd FileType python noremap <buffer> <F5> :w<CR>:!python %<CR>
+        autocmd FileType python inoremap <buffer> <F5> <Esc>:w<CR>:!python %<CR>
+        autocmd FileType python noremap <buffer> <S-F5> :w<CR>:!ipython %<CR>
+        autocmd FileType python inoremap <buffer> <S-F5> <Esc>:w<CR>:!ipython %<CR>
 
         " Automatic insertion of breakpoints
-        autocmd filetype python nnoremap <buffer> <leader>bp :normal Oimport pdb; pdb.set_trace() ### XXX BREAKPOINT<Esc>
+        autocmd FileType python nnoremap <buffer> <leader>bp :normal Oimport pdb; pdb.set_trace() ### XXX BREAKPOINT<Esc>
 
         " Automatic insertion of embedded IPython
-        autocmd filetype python nnoremap <buffer> <leader>bi :normal Oimport IPython; IPython.embed() ### XXX IPython interpreter<Esc>
+        autocmd FileType python nnoremap <buffer> <leader>bi :normal Oimport IPython; IPython.embed() ### XXX IPython interpreter<Esc>
 
         " Toggling True/False
-        autocmd filetype python nnoremap <silent> <C-t> mmviw:s/True\\|False/\={'True':'False','False':'True'}[submatch(0)]/<CR>`m:nohlsearch<CR>
+        autocmd FileType python nnoremap <silent> <C-t> mmviw:s/True\\|False/\={'True':'False','False':'True'}[submatch(0)]/<CR>`m:nohlsearch<CR>
 
         " Run a quick static syntax check every time we save a Python file
         " autocmd BufWritePost *.py call Flake8()
@@ -421,17 +421,17 @@ if has("autocmd")
     augroup go_files "{{{ golang
         au!
 
-        autocmd filetype go noremap <buffer> <F5> :w<CR>:!go install ./...<CR>
-        autocmd filetype go inoremap <buffer> <F5> <Esc>:w<CR>:!go install ./...<CR>
-        autocmd filetype go noremap <buffer> <S-F5> :w<CR>:!go run %<CR>
-        autocmd filetype go inoremap <buffer> <S-F5> <Esc>:w<CR>:!go run %<CR>
-        autocmd filetype go noremap <buffer> <F7> :w<CR>:!go test ./...<CR>
+        autocmd FileType go noremap <buffer> <F5> :w<CR>:!go install ./...<CR>
+        autocmd FileType go inoremap <buffer> <F5> <Esc>:w<CR>:!go install ./...<CR>
+        autocmd FileType go noremap <buffer> <S-F5> :w<CR>:!go run %<CR>
+        autocmd FileType go inoremap <buffer> <S-F5> <Esc>:w<CR>:!go run %<CR>
+        autocmd FileType go noremap <buffer> <F7> :w<CR>:!go test ./...<CR>
 
-        autocmd filetype go noremap <buffer> <F8> :Fmt<CR>
-        autocmd filetype go inoremap <buffer> <F8> <Esc>:Fmt<CR>
+        autocmd FileType go noremap <buffer> <F8> :Fmt<CR>
+        autocmd FileType go inoremap <buffer> <F8> <Esc>:Fmt<CR>
 
         autocmd FileType go let b:delimitMate_matchpairs = "(:),[:],{:}"
-        "autocmd filetype go au BufWritePre <buffer> Fmt
+        "autocmd FileType go au BufWritePre <buffer> Fmt
 
     augroup end " }}}
 
@@ -443,20 +443,20 @@ if has("autocmd")
         au!
 
         autocmd BufRead,BufNewFile *.tex setlocal filetype=tex
-        autocmd filetype tex,bib noremap <buffer> <F5> :w<CR>:!make<CR>
-        autocmd filetype tex,bib setlocal spell
-        "autocmd filetype tex,bib setlocal spelllang=pt_br,en
-        autocmd filetype tex,bib setlocal spelllang=pt,en
+        autocmd FileType tex,bib noremap <buffer> <F5> :w<CR>:!make<CR>
+        autocmd FileType tex,bib setlocal spell
+        "autocmd FileType tex,bib setlocal spelllang=pt_br,en
+        autocmd FileType tex,bib setlocal spelllang=pt,en
         "autocmd BufWritePost *.tex :!latexmk -pdf
 
-        autocmd filetype tex syn region texZone      start="\\begin{verbatim}"           end="\\end{verbatim}\|%stopzone\>"  contains=@Spell
-        autocmd filetype tex syn region texZone      start="\\begin{code}"               end="\\end{code}\|%stopzone\>"  contains=@Spell
+        autocmd FileType tex syn region texZone      start="\\begin{verbatim}"           end="\\end{verbatim}\|%stopzone\>"  contains=@Spell
+        autocmd FileType tex syn region texZone      start="\\begin{code}"               end="\\end{code}\|%stopzone\>"  contains=@Spell
         " listings package:
-        autocmd filetype tex syn region texZone      start="\\begin{lstlisting}"         end="\\end{lstlisting}\|%stopzone\>"    contains=@NoSpell
+        autocmd FileType tex syn region texZone      start="\\begin{lstlisting}"         end="\\end{lstlisting}\|%stopzone\>"    contains=@NoSpell
         " moreverb package:
-        autocmd filetype tex syn region texZone      start="\\begin{verbatimtab}"        end="\\end{verbatimtab}\|%stopzone\>"   contains=@Spell
-        autocmd filetype tex syn region texZone      start="\\begin{verbatimwrite}"      end="\\end{verbatimwrite}\|%stopzone\>" contains=@Spell
-        autocmd filetype tex syn region texZone      start="\\begin{boxedverbatim}"      end="\\end{boxedverbatim}\|%stopzone\>" contains=@Spell
+        autocmd FileType tex syn region texZone      start="\\begin{verbatimtab}"        end="\\end{verbatimtab}\|%stopzone\>"   contains=@Spell
+        autocmd FileType tex syn region texZone      start="\\begin{verbatimwrite}"      end="\\end{verbatimwrite}\|%stopzone\>" contains=@Spell
+        autocmd FileType tex syn region texZone      start="\\begin{boxedverbatim}"      end="\\end{boxedverbatim}\|%stopzone\>" contains=@Spell
     augroup end " }}}
 endif
 " }}}
