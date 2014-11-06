@@ -24,10 +24,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/sudo.vim'
-Plugin 'Raimondi/delimitMate'
 Plugin 'dgryski/vim-godef'
 Plugin 'jnwhiteh/vim-golang'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'Townk/vim-autoclose'
 
 call vundle#end()
 filetype plugin indent on
@@ -430,7 +430,8 @@ if has("autocmd")
         autocmd FileType go noremap <buffer> <F8> :Fmt<CR>
         autocmd FileType go inoremap <buffer> <F8> <Esc>:Fmt<CR>
 
-        autocmd FileType go let b:delimitMate_matchpairs = "(:),[:],{:}"
+        "autocmd FileType go let b:delimitMate_matchpairs = "(:),[:],{:}"
+        autocmd FileType go let g:gofmt_command ='goimports'
         "autocmd FileType go au BufWritePre <buffer> Fmt
 
     augroup end " }}}
