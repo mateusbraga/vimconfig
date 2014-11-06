@@ -27,7 +27,7 @@ Plugin 'vim-scripts/sudo.vim'
 Plugin 'dgryski/vim-godef'
 Plugin 'jnwhiteh/vim-golang'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Plugin 'Townk/vim-autoclose'
+Plugin 'cohama/lexima.vim'
 
 call vundle#end()
 filetype plugin indent on
