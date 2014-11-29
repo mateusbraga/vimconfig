@@ -27,6 +27,7 @@ Plugin 'vim-scripts/sudo.vim'
 "Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'cohama/lexima.vim'
 Plugin 'fatih/vim-go'
+Plugin 'aklt/plantuml-syntax'
 
 
 call vundle#end()
@@ -434,6 +435,12 @@ if has("autocmd")
         autocmd FileType go let g:gofmt_command ='goimports'
         "autocmd FileType go au BufWritePre <buffer> Fmt
 
+        autocmd FileType go let g:go_fmt_autosave = 0
+    augroup end " }}}
+
+    augroup plantuml_files "{{{
+        autocmd FileType plantuml noremap <buffer> <F5> :w<CR>:!plantuml %<CR>
+        autocmd FileType plantuml inoremap <buffer> <F5> <Esc>:w<CR>:!plantuml %<CR>
     augroup end " }}}
 
     augroup markdown_files "{{{
@@ -444,6 +451,7 @@ if has("autocmd")
         au!
 
         autocmd BufRead,BufNewFile *.tex setlocal filetype=tex
+
         autocmd FileType tex,bib noremap <buffer> <F5> :w<CR>:!make<CR>
         autocmd FileType tex,bib setlocal spell
         "autocmd FileType tex,bib setlocal spelllang=pt_br,en
@@ -458,6 +466,10 @@ if has("autocmd")
         autocmd FileType tex syn region texZone      start="\\begin{verbatimtab}"        end="\\end{verbatimtab}\|%stopzone\>"   contains=@Spell
         autocmd FileType tex syn region texZone      start="\\begin{verbatimwrite}"      end="\\end{verbatimwrite}\|%stopzone\>" contains=@Spell
         autocmd FileType tex syn region texZone      start="\\begin{boxedverbatim}"      end="\\end{boxedverbatim}\|%stopzone\>" contains=@Spell
+
+        autocmd FileType tex call lexima#add_rule({'char': '$', 'input_after': '$', 'filetype': 'tex'})
+        autocmd FileType tex call lexima#add_rule({'char': '$', 'at': '\%#\$', 'leave': 1, 'filetype': 'tex'})
+        autocmd FileType tex call lexima#add_rule({'char': '<BS>', 'at': '\$\%#\$', 'delete': 1, 'filetype': 'tex'})
     augroup end " }}}
 endif
 " }}}
