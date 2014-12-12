@@ -1,12 +1,12 @@
-My Vim configuration repository.
+# My Vim configuration repository
 
-I use [gmarik/vundle](http://github.com/gmarik/vundle) to organize my plugins.
+I use [gmarik/vundle](http://github.com/gmarik/vundle) to manage my plugins.
 
-Lately, I have been using vim for C and Go.
+Lately, I have been using vim for Go and C.
 
 ---
 
-What to do:
+# Installing
 
     cd
     git clone --recursive https://github.com/mateusbraga/vimconfig
