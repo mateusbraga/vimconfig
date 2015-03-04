@@ -1,5 +1,5 @@
 " Author: Mateus Braga
-" https://github.com/mateusbraga/vim_mab/
+" https://github.com/mateusbraga/vimconfig/
 "
 " You will need to compile YouCompleteMe core. See the plugin page
 
@@ -32,8 +32,6 @@ Plugin 'aklt/plantuml-syntax'
 
 call vundle#end()
 filetype plugin indent on
-
-
 syntax on
 
 set spellfile=~/.vim/spell/en.utf-8.add
@@ -81,6 +79,11 @@ noremap <C-L> <C-W>l
 noremap <C-H> <C-W>h
 nnoremap <leader>w <C-w>v<C-w>l
 
+nnoremap <F3> :bprevious<CR>
+nnoremap <F4> :bnext<CR>
+vnoremap <F3> <ESC>:bprevious<CR>
+vnoremap <F4> <ESC>:bnext<CR>
+
 " Use Q for formatting the current paragraph (or visual selection)
 vnoremap Q gq
 nnoremap Q gqap
@@ -90,7 +93,7 @@ nnoremap Y y$
 
 " Yank/paste to the OS clipboard with ,y and ,p
 nnoremap <leader>y "+y
-nnoremap <leader>Y "+yy
+nnoremap <leader>Y "+y$
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 
@@ -98,14 +101,14 @@ nnoremap <leader>P "+P
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 nnoremap <silent> <leader>sv :so $MYVIMRC<CR>
 
-" Edit the todo.txt file
-nnoremap <silent> <leader>et :e ~/todo.txt<CR>
-
 " Edit the ultisnips filetype snippets
 nnoremap <silent> <leader>es :let UltiSnipsEditSplit='vertical' \| UltiSnipsEdit<CR>
 
 " Clears the search register
 nnoremap <silent> <leader>/ :nohlsearch<CR>
+
+" Remove trailing whitespace
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Pull word under cursor into LHS of a substitute (for quick search and
 " replace)
@@ -118,9 +121,6 @@ vnoremap <Tab> %
 " Folding
 nnoremap <Space> za
 vnoremap <Space> za
-
-" Remove trailing whitespace
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Reselect text that was just pasted with ,v
 nnoremap <leader>v V`]
@@ -135,11 +135,6 @@ nnoremap <silent> <leader>x /^\(<\\|=\\|>\)\{7\}\([^=].\+\)\?$<CR>
 
 inoremap <F2> <C-R>=strftime("%F %T%z")<CR>
 
-nnoremap <F3> :bprevious<CR>
-nnoremap <F4> :bnext<CR>
-vnoremap <F3> <ESC>:bprevious<CR>
-vnoremap <F4> <ESC>:bnext<CR>
-
 " }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -148,7 +143,7 @@ vnoremap <F4> <ESC>:bnext<CR>
 "nnoremap <leader>i :set list!<cr>
 
 " Toggle line numbers
-"nnoremap <leader>N :setlocal number!<cr>
+nnoremap <leader>N :setlocal number!<cr>
 
 " Use normal regex
 nnoremap / /\v
@@ -318,11 +313,14 @@ let Tlist_Use_Right_Window=1
 " }}}
 
 " Ctrlp {{{
-
 "Change the default mapping and the default command to invoke CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
-
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|plantuml|png)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 " }}}
 
 " Syntastic {{{
@@ -343,6 +341,12 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 nmap <leader>a <Esc>:Ack 
 set grepprg=ack         " replace the default grep program with ack
 " }}}
+
+" Fugitive {{{
+if has("autocmd")
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+endif
+"}}}
 
 " Filetype specific handling {{{
 " only do this part when compiled with support for autocommands
@@ -422,20 +426,34 @@ if has("autocmd")
     augroup go_files "{{{ golang
         au!
 
-        autocmd FileType go noremap <buffer> <F5> :w<CR>:!go install ./...<CR>
-        autocmd FileType go inoremap <buffer> <F5> <Esc>:w<CR>:!go install ./...<CR>
-        autocmd FileType go noremap <buffer> <S-F5> :w<CR>:!go run %<CR>
-        autocmd FileType go inoremap <buffer> <S-F5> <Esc>:w<CR>:!go run %<CR>
-        autocmd FileType go noremap <buffer> <F7> :w<CR>:!go test ./...<CR>
+        autocmd FileType go noremap <buffer> <F5> :w<CR>:GoInstall<CR>
+        autocmd FileType go inoremap <buffer> <F5> <Esc>:w<CR>:GoInstall<CR>
+        autocmd FileType go noremap <buffer> <S-F5> :w<CR>:GoRun %<CR>
+        autocmd FileType go inoremap <buffer> <S-F5> <Esc>:w<CR>:GoRun %<CR>
+        autocmd FileType go noremap <buffer> <F7> :w<CR>:GoTest<CR>
+        autocmd FileType go inoremap <buffer> <F7> <Esc>:w<CR>:GoTest<CR>
+        autocmd FileType go noremap <buffer> <S-F7> :w<CR>:GoCoverage<CR>
+        autocmd FileType go inoremap <buffer> <S-F7> <Esc>:w<CR>:GoCoverage<CR>
 
         autocmd FileType go noremap <buffer> <F8> :GoImports<CR>
         autocmd FileType go inoremap <buffer> <F8> <Esc>:GoImports<CR>
 
         "autocmd FileType go let b:delimitMate_matchpairs = "(:),[:],{:}"
-        autocmd FileType go let g:gofmt_command ='goimports'
-        "autocmd FileType go au BufWritePre <buffer> Fmt
-
+        autocmd FileType go let g:go_fmt_command ='goimports'
         autocmd FileType go let g:go_fmt_autosave = 0
+
+        au FileType go nmap <Leader>ds <Plug>(go-def-split)
+        au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+        au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+        au FileType go nmap <Leader>r <Plug>(go-rename)
+    augroup end " }}}
+
+    augroup js_files "{{{ javascript
+        au!
+
+        autocmd FileType javascript noremap <buffer> <F8> :w<CR>:!jsfmt -w %<CR>
+        autocmd FileType javascript inoremap <buffer> <F8> <Esc>:w<CR>:!jsfmt -w %<CR>
     augroup end " }}}
 
     augroup plantuml_files "{{{
