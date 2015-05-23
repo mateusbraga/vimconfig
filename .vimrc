@@ -28,6 +28,10 @@ Plugin 'vim-scripts/sudo.vim'
 Plugin 'cohama/lexima.vim'
 Plugin 'fatih/vim-go'
 Plugin 'aklt/plantuml-syntax'
+Plugin 'oplatek/Conque-Shell'
+
+Plugin 'tpope/vim-fireplace'
+Plugin 'guns/vim-clojure-static'
 
 
 call vundle#end()
@@ -426,10 +430,10 @@ if has("autocmd")
     augroup go_files "{{{ golang
         au!
 
-        autocmd FileType go noremap <buffer> <F5> :w<CR>:GoInstall<CR>
-        autocmd FileType go inoremap <buffer> <F5> <Esc>:w<CR>:GoInstall<CR>
-        autocmd FileType go noremap <buffer> <S-F5> :w<CR>:GoRun %<CR>
-        autocmd FileType go inoremap <buffer> <S-F5> <Esc>:w<CR>:GoRun %<CR>
+        autocmd FileType go noremap <buffer> <F5> :w<CR>:GoRun %<CR>
+        autocmd FileType go inoremap <buffer> <F5> <Esc>:w<CR>:GoRun %<CR>
+        autocmd FileType go noremap <buffer> <S-F5> :w<CR>:GoInstall<CR>
+        autocmd FileType go inoremap <buffer> <S-F5> <Esc>:w<CR>:GoInstall<CR>
         autocmd FileType go noremap <buffer> <F7> :w<CR>:GoTest<CR>
         autocmd FileType go inoremap <buffer> <F7> <Esc>:w<CR>:GoTest<CR>
         autocmd FileType go noremap <buffer> <S-F7> :w<CR>:GoCoverage<CR>
@@ -447,6 +451,10 @@ if has("autocmd")
         au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
         au FileType go nmap <Leader>r <Plug>(go-rename)
+
+        au FileType go nmap <Leader>gd <Plug>(go-doc)
+        au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+        au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
     augroup end " }}}
 
     augroup js_files "{{{ javascript
