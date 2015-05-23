@@ -13,9 +13,6 @@ Lately, I have been using vim for Go and C.
     ln -s vimconfig/.vim .vim
     ln -s vimconfig/.vimrc .vimrc
     vim +PluginInstall +qall
-
-Install gocode (assuming $GOPATH/bin is in $PATH)
-
-    go get -u github.com/nsf/gocode
+    vim +GoInstallBinaries +qall
 
 Compile YouCompleteMe - See [https://github.com/Valloric/YouCompleteMe](https://github.com/Valloric/YouCompleteMe)
