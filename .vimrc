@@ -1,11 +1,12 @@
 " Author: Mateus Braga
 " https://github.com/mateusbraga/vimconfig/
 "
-" You will need to compile YouCompleteMe core. See the plugin page
+" You will need to compile YouCompleteMe core. See its github page.
 
 set nocompatible
 filetype off
 
+"" Begin of Plugins
 set rtp+=~/.vim/bundle/vundle/
 call vundle#begin()
 
@@ -24,23 +25,19 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/sudo.vim'
-"Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'cohama/lexima.vim'
 Plugin 'fatih/vim-go'
 Plugin 'aklt/plantuml-syntax'
 Plugin 'oplatek/Conque-Shell'
 
-Plugin 'tpope/vim-fireplace'
-Plugin 'guns/vim-clojure-static'
-
 
 call vundle#end()
 filetype plugin indent on
 syntax on
+"" End of Plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set spellfile=~/.vim/spell/en.utf-8.add
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Change the mapleader from \ to ,
 let mapleader=","
