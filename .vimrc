@@ -383,6 +383,13 @@ if has("autocmd")
         autocmd FileType txt setlocal spelllang=en,pt_br
     augroup end "}}}
 
+    augroup c_files "{{{
+        au!
+
+        au FileType c,cpp setlocal noexpandtab shiftwidth=8 tabstop=8 softtabstop=8
+        au FileType c,cpp setlocal comments-=:// comments+=f://
+    augroup end "}}}
+
     augroup rst_files "{{{
         au!
 
