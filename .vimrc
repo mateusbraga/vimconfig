@@ -13,6 +13,9 @@ call vundle#begin()
 " let Vundle manage Vundle - required!
 Plugin 'gmarik/vundle'
 
+Plugin 'google/vim-maktaba'
+Plugin 'google/vim-glaive'
+
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
@@ -29,9 +32,13 @@ Plugin 'cohama/lexima.vim'
 Plugin 'fatih/vim-go'
 Plugin 'aklt/plantuml-syntax'
 Plugin 'oplatek/Conque-Shell'
-
-
+Plugin 'google/vim-codefmt'
 call vundle#end()
+
+call glaive#Install()
+" Optional: Enable codefmt's default mappings on the <Leader>= prefix.
+Glaive codefmt plugin[mappings]
+
 filetype plugin indent on
 syntax on
 "" End of Plugins
